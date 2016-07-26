@@ -1,4 +1,4 @@
-const firebase = require('firebase');
+import firebase from 'firebase';
 
 const config = {
     apiKey: "AIzaSyC-VHnRCRn89-FVCx1Axnf1zgqwU2mEfFA",
@@ -8,7 +8,7 @@ const config = {
 };
 const app = firebase.initializeApp(config);
 
-class Base {
+export default class Base {
     constructor(collection) {
         this.collection = collection;
         this.db = app.database();
@@ -57,6 +57,3 @@ class Base {
         });
     }
 }
-
-
-module.exports = Base;

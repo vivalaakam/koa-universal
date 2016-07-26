@@ -1,8 +1,7 @@
-"use strict";
-const Todo = require('../models/todo');
-const todoModel = new Todo('todos');
+import Todo from '../models/todo';
+const todoModel = new Todo();
 
-module.exports = {
+export default {
     getId: async function getId(ctx, next) {
         const data = await todoModel.getId(ctx.params.id);
         ctx.body = data;

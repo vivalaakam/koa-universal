@@ -1,6 +1,6 @@
-const Koa = require('koa');
-const routes = require('./routes');
-const bodyParser = require('koa-bodyparser');
+import Koa from 'koa';
+import routes from './routes';
+import bodyParser from 'koa-bodyparser';
 
 const app = new Koa();
 
@@ -15,6 +15,6 @@ app.use(bodyParser());
 
 routes(app);
 
-app.listen(3001, function () {
-    console.log('App listening at port 3001');
+app.listen(3000, function () {
+    console.log('App listening at port 3000');
 });
