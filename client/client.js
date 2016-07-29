@@ -1,29 +1,24 @@
 import css from "../common/style/index.less"
 import React from "react"
 import ReactDOM from "react-dom"
-import {Router, match} from "react-router"
-import createBrowserHistory from "history/lib/createBrowserHistory"
-import {renderToString} from "react-dom/server"
+import {Router, browserHistory} from "react-router"
 import {storeFactory} from "../common/store"
 import routes from "../common/routes/index.jsx"
 import {Provider} from 'react-redux'
-
+import { routerReducer, syncHistoryWithStore, push } from 'react-router-redux';
 
 !(async function () {
-    const store = await storeFactory({initialState: window.STORE_STATE});
-    const history = createBrowserHistory();
-
     const mountNode = document.getElementById("app");
+    const store = await storeFactory({initialState: window.__INITIAL_STATE__}, {routing: routerReducer});
+    const history = syncHistoryWithStore(browserHistory, store);
+    history.listen(location => console.log(location.pathname));
 
-    match({history, routes}, (error, redirectLocation, renderProps) => {
-        ReactDOM.render(
-            <Provider store={store}>
-                <Router {...renderProps} />
-            </Provider>, mountNode);
-    });
+    const app = (
+        <Provider store={store}>
+            <Router history={history} children={routes({store, first: { time: true }})}/>
+        </Provider>
+    );
 
-
-    window.app = {}
-
+    ReactDOM.render(app, mountNode);
 })();
 

@@ -7,7 +7,7 @@ export default (locals = {store_state: {}, content: ""}) => `
     <body>
       <div id="app">${locals.content}</div>
       <script>
-        window.store_state = ${JSON.stringify(locals.store_state)}
+        window.__INITIAL_STATE__ = ${JSON.stringify(locals.store_state)}
       </script>
 
       <script src="/assets/js/client.js"></script>
