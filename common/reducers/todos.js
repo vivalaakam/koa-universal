@@ -1,4 +1,4 @@
-import {ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, COMPLETE_ALL, CLEAR_COMPLETED} from '../constants/todos';
+import {ADD_TODO, DELETE_TODO, UPDATE_TODO, COMPLETE_ALL, CLEAR_COMPLETED} from '../constants/todos';
 
 const $$initialState = [];
 
@@ -6,11 +6,7 @@ export default function todos($$state = $$initialState, action) {
     switch (action.type) {
         case ADD_TODO:
             return [
-                {
-                    id: $$state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-                    completed: false,
-                    text: action.text
-                },
+                action.todo,
                 ...$$state
             ];
 
@@ -19,19 +15,8 @@ export default function todos($$state = $$initialState, action) {
                 todo.id !== action.id
             );
 
-        case EDIT_TODO:
-            return $$state.map(todo =>
-                todo.id === action.id ?
-                    Object.assign({}, todo, {text: action.text}) :
-                    todo
-            );
-
-        case COMPLETE_TODO:
-            return $$state.map(todo =>
-                todo.id === action.id ?
-                    Object.assign({}, todo, {completed: !todo.completed}) :
-                    todo
-            );
+        case UPDATE_TODO:
+            return $$state.map(todo => todo.id === action.todo.id ? Object.assign({}, todo, action.todo) : todo);
 
         case COMPLETE_ALL:
             const areAllMarked = $$state.every(todo => todo.completed);

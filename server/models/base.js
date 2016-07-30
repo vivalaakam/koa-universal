@@ -18,7 +18,11 @@ export default class Base {
     list() {
         return new Promise((resolve) => {
             this.db.ref(this.collection).once("value", (data) => {
-                resolve(data.val());
+                let tmp = data.val();
+                let resp = Object.keys(tmp).map(id => ({
+                    id, ...tmp[id]
+                }));
+                resolve(resp);
             });
         })
     }
@@ -26,7 +30,11 @@ export default class Base {
     getId(id) {
         return new Promise((resolve) => {
             this.db.ref(`${this.collection}/${id}`).once('value', (data) => {
-                resolve(data.val());
+                let val = {
+                    id: data.key,
+                    ...data.val()
+                };
+                resolve(val);
             });
         });
     }

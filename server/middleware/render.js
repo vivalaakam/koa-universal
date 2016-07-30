@@ -13,13 +13,7 @@ import Todo from '../models/todo';
 const todoModel = new Todo();
 
 export default async function reactRender(ctx) {
-    let todos = await todoModel.list();
-    todos = Object.keys(todos).map((id) => ({
-        id,
-        ...todos[id]
-    }));
-
-
+    const todos = await todoModel.list();
     const store = await storeFactory({initialState: {todos}});
     const history = createHistory(ctx.req.url);
 
