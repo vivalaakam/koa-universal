@@ -63,6 +63,7 @@ export default class Rest {
         return fetch(url, {
             method: 'DELETE',
             ...this.basic()
-        });
+        })
+            .then(response => response.status === 204 || response.json());
     }
 }

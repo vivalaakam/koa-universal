@@ -24,6 +24,13 @@ function deleteTodoDispatch(id) {
     }
 }
 
+function listTodoDispatch(todos) {
+    return {
+        type: types.LIST_TODO,
+        todos
+    }
+}
+
 export function addTodo(text = '', completed = false) {
     return dispatch => {
         return todos.create({text, completed})
@@ -60,9 +67,19 @@ export function completeTodo({id, text , completed}) {
 }
 
 export function completeAll() {
-    return {type: types.COMPLETE_ALL}
+    return dispatch => {
+        return todos.completeAll()
+            .then((todos) => {
+                dispatch(listTodoDispatch(todos));
+            })
+    };
 }
 
 export function clearCompleted() {
-    return {type: types.CLEAR_COMPLETED}
+    return dispatch => {
+        return todos.clearCompleted()
+            .then((todos) => {
+                dispatch(listTodoDispatch(todos));
+            })
+    };
 }

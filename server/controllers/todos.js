@@ -19,6 +19,17 @@ export default {
     },
     removeItem: async function removeItem(ctx, next) {
         await todoModel.remove(ctx.params.id);
+        ctx.body = {
+            completed: true
+        };
         ctx.status = 204;
+    },
+    completeAllItems: async function completeAllItems(ctx) {
+        const data = await todoModel.completeAll();
+        ctx.body = data;
+    },
+    clearCompletedItems: async function clearCompletedItems(ctx) {
+        const data = await todoModel.clearCompleted();
+        ctx.body = data;
     }
 };
