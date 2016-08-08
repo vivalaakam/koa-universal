@@ -7,11 +7,13 @@ export default {
         ctx.body = data;
     },
     list: async function list(ctx, next) {
-        const data = await todoModel.list();
+        const auth = JSON.parse(ctx.state.user || "{}");
+        const data = await todoModel.list({user_id: auth.id});
         ctx.body = data;
     },
     createItem: async function createItem(ctx, next) {
-        ctx.body = await todoModel.create(ctx.request.body);
+        const auth = JSON.parse(ctx.state.user || "{}");
+        ctx.body = await todoModel.create({...ctx.request.body, user_id: auth.id});
         ctx.status = 201;
     },
     updateItem: async function updateItem(ctx, next) {

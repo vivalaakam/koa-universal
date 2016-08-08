@@ -1,9 +1,8 @@
 import r from 'rethinkdb';
-export { r };
+export {r};
 export default class RethinkDB {
-    constructor(collection, db_name) {
+    constructor(collection) {
         this.collection = collection;
-        this.db_name = db_name;
 
         this.tableCheck();
     }
@@ -20,16 +19,16 @@ export default class RethinkDB {
             this._conn = r.connect({
                 host: process.env.RETHINKDB_DB,
                 port: process.env.RETHINKDB_PORT,
-                db: this.db_name
+                db: process.env.RETHINKDB_NAME
             });
         }
 
         return this._conn;
     }
 
-    async list() {
+    async list(filter = {}) {
         let db = await this.db();
-        let query = await r.table(this.collection).run(db);
+        let query = await r.table(this.collection).filter(filter).run(db);
         let result = await query.toArray();
         return result;
     }
@@ -71,7 +70,7 @@ export default class RethinkDB {
             await r.tableCreate(this.collection).run(db);
 
             if (this.indexes) {
-                this.indexes.forEach(async (index) => {
+                this.indexes.forEach(async(index) => {
                     await r.table(this.collection).indexCreate(index).run(db);
                 });
             }
