@@ -11,7 +11,8 @@ const actions = (dispatch) => ({
     dispatch
 });
 
-const Main = ({actions}) => {
+const Main = ({actions, dispatch}) => {
+    dispatch(mainActions.setTitle('Main page'));
     return (
         <MainWidget {...{actions}}/>
     )

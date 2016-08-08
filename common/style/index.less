@@ -376,6 +376,9 @@ html .clear-completed:active {
   top: 0px;
   left: 0px;
   background-color: rgba(255, 255, 255, .7);
+  font-size: 25px;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 .Topbar__auth {
@@ -383,4 +386,23 @@ html .clear-completed:active {
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.Topbar__auth-link {
+  margin-right: 10px;
+  color: #333;
+  &:last-child {
+    margin-right: 0px;
+  }
+  &:visited {
+    color: #333;
+  }
+}
+
+.Topbar__title {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+
 }

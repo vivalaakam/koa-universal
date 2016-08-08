@@ -26,7 +26,6 @@ export default class Auth extends Component {
     render() {
         return (
             <div>
-                Auth Page
                 <a href="javascript:void(0)" onClick={::this.github}>Login via Github</a>
             </div>
         );

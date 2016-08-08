@@ -8,22 +8,27 @@ export default class Topbar extends Component {
         if (auth && auth.id) {
             return (
                 <div className="Topbar__auth-links">
-                    <Link to="/todos">Todos</Link>
-                    <a href="/api/auth/logout">Logout</a>
+                    <Link className="Topbar__auth-link" to="/todos">Todos</Link>
+                    <a className="Topbar__auth-link" href="/api/auth/logout">Logout</a>
                 </div>
             )
         } else {
             return (
                 <div className="Topbar__auth-links">
-                    <Link to="/auth">Auth</Link>
+                    <Link className="Topbar__auth-link" to="/auth">Auth</Link>
                 </div>
             )
         }
     }
 
     render() {
+        const {main} = this.props;
+
         return (
             <div className="Topbar">
+                <div className="Topbar__title">
+                    {main.title}
+                </div>
                 <div className="Topbar__auth">
                     {this.links()}
                 </div>

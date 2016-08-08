@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux';
 import * as todoActions from '../actions/todos'
+import {setTitle} from '../actions/main';
 import TodosWidget from '../components/Todos.jsx';
 
-const state = ({ todos }) => ({
+const state = ({todos}) => ({
     todos
 });
 
@@ -13,7 +14,8 @@ const actions = (dispatch) => ({
     dispatch
 });
 
-const Todos = ({todos, actions}) => {
+const Todos = ({todos, actions, dispatch}) => {
+    dispatch(setTitle('Todos'));
     return (
         <TodosWidget {...{todos, actions}}/>
     )
