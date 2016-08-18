@@ -19,13 +19,35 @@ export default class Auth extends Component {
 
     success() {
         const {actions} = this.props;
-        console.log(actions, 'success');
         actions.getAuth();
+    }
+
+    submitAuth() {
+        const {actions} = this.props;
+        actions.authentificate(this.refs.username.value, this.refs.password.value);
+    }
+
+    getError() {
+        if (this.props.auth.error) {
+            return (
+                <div>{this.props.auth.error}</div>
+            )
+        }
     }
 
     render() {
         return (
             <div>
+                {this.getError()}
+                <div>
+                    <input type="email" ref="username"/>
+                </div>
+                <div>
+                    <input type="password" ref="password"/>
+                </div>
+                <div>
+                    <button onClick={::this.submitAuth}>Submit</button>
+                </div>
                 <a href="javascript:void(0)" onClick={::this.github}>Login via Github</a>
             </div>
         );

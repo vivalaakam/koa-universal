@@ -1,6 +1,6 @@
 import  RethinkDB, {r} from './rethinkdb';
 
-export default class Todo extends RethinkDB {
+export default class Auth extends RethinkDB {
     constructor() {
         super('users');
     }
@@ -12,10 +12,7 @@ export default class Todo extends RethinkDB {
     }
 
     async getAll(username, type) {
-        let db = await this.db();
-        let query = await r.table(this.collection).filter({[`${type}_login`]: username}).run(db);
-        let result = await query.toArray();
-        return result;
+        return this.list({[`${type}_login`]: username});
     }
 
 }

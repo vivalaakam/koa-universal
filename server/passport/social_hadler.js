@@ -14,6 +14,7 @@ export function callback(mapper, type) {
             }
 
             let user = await auth.create(mapper(profile));
+            delete user.password;
             return done(null, user);
         }
     };

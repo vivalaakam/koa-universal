@@ -7,6 +7,7 @@ router
     .get('/', auth.current)
     .get('/logout', auth.logout)
     .get('/close', auth.close)
+    .post('/', passport.authenticate('local'), auth.login)
     .get('/github', passport.authenticate('github'))
     .get('/github/callback', passport.authenticate('github', {
         successRedirect: '/api/auth/close',

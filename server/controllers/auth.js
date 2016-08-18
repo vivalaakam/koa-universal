@@ -3,8 +3,9 @@ const authModel = new Auth();
 
 export default {
     login: async function login(ctx, next) {
-        const data = await authModel.login(ctx.request.body.email, ctx.request.body.password);
-        ctx.body = data;
+        const auth = ctx.state.user;
+        console.log('login', auth, ctx.state);
+        ctx.body = auth;
     },
     logout: function logout(ctx, next) {
         ctx.logout();
