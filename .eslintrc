@@ -1,0 +1,29 @@
+{
+  "extends": "airbnb",
+  "ecmaFeatures": {
+    "restParams": true,
+    "experimentalObjectRestSpread": true
+  },
+  "rules": {
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "no-param-reassign": 0,
+    "no-underscore-dangle": [
+      2,
+      {
+        "allow": [
+          "__INITIAL_STATE__"
+        ]
+      }
+    ],
+    "max-len": [
+      2,
+      120
+    ]
+  },
+  "globals": {
+    "fetch": false
+  }
+}

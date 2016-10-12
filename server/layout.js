@@ -1,4 +1,4 @@
-export default (locals = {store_state: {}, content: ""}) => `
+export default (locals = { storeState: {}, content: '' }) => (`
   <html>
     <head>
       <meta charset="utf-8" />
@@ -7,10 +7,10 @@ export default (locals = {store_state: {}, content: ""}) => `
     <body>
       <div id="app">${locals.content}</div>
       <script>
-        window.__INITIAL_STATE__ = ${JSON.stringify(locals.store_state)}
+        window.__INITIAL_STATE__ = ${JSON.stringify(locals.storeState)}
       </script>
 
       <script src="/assets/js/client.js"></script>
     </body>
   </html>
-`
+`);

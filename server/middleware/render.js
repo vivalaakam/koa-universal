@@ -1,49 +1,32 @@
-import React from "react"
-import {match, RouterContext} from 'react-router';
-import {renderToString} from "react-dom/server"
-import createHistory from 'history/lib/createMemoryHistory'
-import {storeFactory} from '../../common/store'
-import routes from "../../common/routes"
-import layout from "../layout"
-import {Provider}   from 'react-redux'
-import {ReduxRouter} from 'redux-router'
+/* eslint no-console: ["error", { allow: ["error"] }] */
 
-
-import Todo from '../models/todo';
-const todoModel = new Todo();
-
-export default async function reactRender(ctx) {
-    const auth = JSON.parse(ctx.state.user || "{}");
-    const store = await storeFactory({initialState: {...ctx.prefetch, auth}});
-    const history = createHistory(ctx.req.url);
-
-    const data = await route(history, store, routes({store, first: {time: true}}));
-    ctx.status = 200;
-    ctx.body = layout(data)
-
-}
-
+import { match } from 'react-router';
+import createMemoryHistory from 'history/lib/createMemoryHistory';
+import storeFactory from '../../common/store';
+import myRoutes from '../../common/routes';
+import layout from '../layout';
+import app from './app';
 
 function route(history, store, routes) {
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
+    match({ history, routes }, (error, redirectLocation, renderProps) => {
+      if (error) {
+        console.error(error);
+        return reject(error);
+      }
 
-        match({history, routes}, (error, redirectLocation, renderProps) => {
+      const storeState = store.getState();
+      const content = app(store, renderProps);
+      return resolve({ content, storeState });
+    });
+  });
+}
 
-            if (error) {
-                console.error(error);
-                return reject(error);
-            }
-
-            const store_state = store.getState();
-
-            const content = renderToString(
-                <Provider store={store}>
-                    <RouterContext {...renderProps} />
-                </Provider>
-            );
-
-            resolve({content, store_state})
-        })
-
-    })
+export default async function reactRender(ctx) {
+  const auth = ctx.state.user;
+  const store = await storeFactory({ initialState: { ...ctx.prefetch, auth } });
+  const history = createMemoryHistory(ctx.req.url);
+  const data = await route(history, store, myRoutes({ store, first: { time: true } }));
+  ctx.status = 200;
+  ctx.body = layout(data);
 }
