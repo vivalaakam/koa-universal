@@ -21,4 +21,4 @@ Main.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-export default connect({}, actionsDispatch)(Main);
+export default connect(state => state, actionsDispatch)(Main);
