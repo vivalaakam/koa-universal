@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js --harmony-generators ",
-    "eslint": "eslint ./",
+    "eslint": "eslint --ext .js --ext .jsx ./",
     "test": "cross-env NODE_ENV=test cross-env NODE_PATH=./ mocha --compilers js:babel-register -r spec/setup.mocha.js --recursive 'spec/**/*.test.js'"
   },
   "author": "",
