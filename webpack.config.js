@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -19,7 +20,7 @@ module.exports = {
     loaders: [
       {
         test: /\.less$/,
-        loader: 'style!css!less'
+        loader: ExtractTextPlugin.extract('style', 'css!less')
       },
       {
         test: /\.jsx?$/,
@@ -40,6 +41,7 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+    }),
+    new ExtractTextPlugin('styles.css')
   ]
 };

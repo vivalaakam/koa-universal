@@ -3,6 +3,7 @@ export default (locals = { storeState: {}, content: '' }) => (`
     <head>
       <meta charset="utf-8" />
       <title>Boilerplate</title>
+      <link href="/assets/styles.css" rel="stylesheet" />
     </head>
     <body>
       <div id="app">${locals.content}</div>
