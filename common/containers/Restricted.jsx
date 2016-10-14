@@ -1,27 +1,28 @@
-import React from 'react'
+import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as authActions from '../actions/auth';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
-
+import * as authActions from '../actions/auth';
 
 const state = ({ auth }) => ({ auth });
 
-const actions = (dispatch) => ({
+const actionsDispatch = dispatch => ({
   actions: bindActionCreators({ ...authActions, pushState }, dispatch),
   dispatch
 });
 
-class Restricted extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+class Restricted extends Component {
+  static propTypes = {
+    actions: PropTypes.object.isRequired,
+    children: PropTypes.element.isRequired,
+    auth: PropTypes.object.isRequired
+  };
 
   componentWillMount() {
     this.checkAuth();
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     this.checkAuth();
   }
 
@@ -37,11 +38,10 @@ class Restricted extends React.Component {
     const { auth } = this.props;
     if (auth && auth.id) {
       return this.props.children;
-    } else {
-      return null;
     }
-  }
 
+    return null;
+  }
 }
 
-export default connect(state, actions)(Restricted)
+export default connect(state, actionsDispatch)(Restricted);

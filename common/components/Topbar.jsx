@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 export default class Topbar extends Component {
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    main: PropTypes.object.isRequired
+  };
+
   links() {
     const { auth } = this.props;
     if (auth && auth.id) {
@@ -10,14 +15,14 @@ export default class Topbar extends Component {
           <Link className="Topbar__auth-link" to="/todos">Todos</Link>
           <a className="Topbar__auth-link" href="/api/auth/logout">Logout</a>
         </div>
-      )
+      );
     }
 
     return (
       <div className="Topbar__auth-links">
         <Link className="Topbar__auth-link" to="/auth">Auth</Link>
       </div>
-    )
+    );
   }
 
   render() {

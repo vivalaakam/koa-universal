@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-import classnames from 'classnames'
-import TodoTextInput from './TodoTextInput'
+import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
+import TodoTextInput from './TodoTextInput';
 
-class TodoItem extends Component {
+export default class TodoItem extends Component {
 
   static propTypes = {
     todo: PropTypes.object.isRequired,
@@ -15,18 +15,19 @@ class TodoItem extends Component {
     super(props, context);
     this.state = {
       editing: false
-    }
+    };
   }
 
   handleDoubleClick() {
-    this.setState({ editing: true })
+    this.setState({ editing: true });
   }
 
-  handleSave(todo, text) {
+  handleSave(text) {
+    const { todo } = this.props;
     if (text.length === 0) {
       this.props.deleteTodo(todo.id);
     } else {
-      this.props.editTodo({ ...todo, text });
+      this.props.updateTodo({ ...todo, text });
     }
     this.setState({ editing: false });
   }
@@ -37,35 +38,41 @@ class TodoItem extends Component {
     let element;
     if (this.state.editing) {
       element = (
-        <TodoTextInput text={todo.text}
-                       editing={this.state.editing}
-                       onSave={(text) => this.handleSave(todo, text)}/>
-      )
+        <TodoTextInput
+          text={todo.text}
+          editing={this.state.editing}
+          onSave={::this.handleSave}
+        />
+      );
     } else {
       element = (
         <div className="view">
-          <input className="toggle"
-                 type="checkbox"
-                 checked={todo.completed}
-                 onChange={() => completeTodo(todo)}/>
-          <label onDoubleClick={this.handleDoubleClick.bind(this)}>
+          <input
+            className="toggle"
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => completeTodo(todo)}
+          />
+          <span onDoubleClick={::this.handleDoubleClick}>
             {todo.text}
-          </label>
-          <button className="destroy"
-                  onClick={() => deleteTodo(todo.id)}/>
+          </span>
+          <button
+            className="destroy"
+            onClick={() => deleteTodo(todo.id)}
+          />
         </div>
-      )
+      );
     }
 
+    const className = classnames({
+      completed: todo.completed,
+      editing: this.state.editing
+    });
+
     return (
-      <li className={classnames({
-        completed: todo.completed,
-        editing: this.state.editing
-      })}>
+      <li className={className}>
         {element}
       </li>
-    )
+    );
   }
 }
-
-export default TodoItem

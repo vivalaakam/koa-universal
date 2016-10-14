@@ -1,15 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as todoActions from '../actions/todos'
+import * as todoActions from '../actions/todos';
 import { setTitle } from '../actions/main';
-import TodosWidget from '../components/Todos.jsx';
+import TodosWidget from '../components/Todos';
 
-const state = ({ todos }) => ({
-  todos
-});
+const state = ({ todos }) => ({ todos });
 
-const actions = (dispatch) => ({
+const actionsDispatch = dispatch => ({
   actions: bindActionCreators(todoActions, dispatch),
   dispatch
 });
@@ -17,8 +15,14 @@ const actions = (dispatch) => ({
 const Todos = ({ todos, actions, dispatch }) => {
   dispatch(setTitle('Todos'));
   return (
-    <TodosWidget {...{ todos, actions }}/>
-  )
-}
+    <TodosWidget {...{ todos, actions }} />
+  );
+};
 
-export default connect(state, actions)(Todos)
+Todos.propTypes = {
+  actions: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  todos: PropTypes.array.isRequired
+};
+
+export default connect(state, actionsDispatch)(Todos);

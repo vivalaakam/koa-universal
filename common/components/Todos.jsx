@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import Header from '../components/Header'
-import MainSection from '../components/MainSection'
+import React, { PropTypes } from 'react';
+import Header from '../components/Header';
+import MainSection from '../components/MainSection';
 
-export default class Todos extends Component {
-  render() {
-    const { actions, todos } = this.props;
-    return (
-      <div>
-        <Header addTodo={actions.addTodo}/>
-        <MainSection todos={todos} actions={actions}/>
-      </div>
-    );
-  }
+export default function Todos({ actions, todos }) {
+  return (
+    <div>
+      <Header addTodo={actions.addTodo} />
+      <MainSection todos={todos} actions={actions} />
+    </div>
+  );
 }
+
+Todos.propTypes = {
+  actions: PropTypes.object.isRequired,
+  todos: PropTypes.array.isRequired
+};

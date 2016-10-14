@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as mainActions from '../actions/main'
-import MainWidget from '../components/Main.jsx';
+import * as mainActions from '../actions/main';
+import MainWidget from '../components/Main';
 
-const state = ({}) => ({});
-
-const actions = (dispatch) => ({
+const actionsDispatch = dispatch => ({
   actions: bindActionCreators(mainActions, dispatch),
   dispatch
 });
@@ -14,8 +12,13 @@ const actions = (dispatch) => ({
 const Main = ({ actions, dispatch }) => {
   dispatch(mainActions.setTitle('Main page'));
   return (
-    <MainWidget {...{ actions }}/>
-  )
+    <MainWidget {...{ actions }} />
+  );
 };
 
-export default connect(state, actions)(Main)
+Main.propTypes = {
+  actions: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
+
+export default connect({}, actionsDispatch)(Main);

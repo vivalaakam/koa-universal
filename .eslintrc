@@ -1,10 +1,16 @@
 {
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "ecmaFeatures": {
+    "jsx": true,
     "restParams": true,
     "experimentalObjectRestSpread": true
   },
   "rules": {
+    "react/forbid-prop-types": 0,
+    "react/jsx-no-bind": 0,
+    "strict": 0,
+    "no-mixed-operators": 0,
     "comma-dangle": [
       2,
       "never"
@@ -24,6 +30,8 @@
     ]
   },
   "globals": {
-    "fetch": false
+    "fetch": false,
+    "document": false,
+    "window": false
   }
 }
