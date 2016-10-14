@@ -1,33 +1,29 @@
 import React, { Component, PropTypes } from 'react';
 import TodoItem from '../TodoItem/TodoItem';
 import Footer from '../Footer/Footer';
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../../constants/filter';
+import { FILTER_ALL, FILTER_COMPLETED, FILTER_ACTIVE } from '../../reducers/filter';
 import style from './MainSection.scss';
 
 const TODO_FILTERS = {
-  [SHOW_ALL]: () => true,
-  [SHOW_ACTIVE]: todo => !todo.completed,
-  [SHOW_COMPLETED]: todo => todo.completed
+  [FILTER_ALL]: () => true,
+  [FILTER_ACTIVE]: todo => !todo.completed,
+  [FILTER_COMPLETED]: todo => todo.completed
 };
 
 export default class MainSection extends Component {
 
   static propTypes = {
     todos: PropTypes.array.isRequired,
+    filter: PropTypes.symbol.isRequired,
     actions: PropTypes.object.isRequired
   };
-
-  constructor(props, context) {
-    super(props, context);
-    this.state = { filter: SHOW_ALL };
-  }
 
   handleClearCompleted() {
     this.props.actions.clearCompleted();
   }
 
   handleShow(filter) {
-    this.setState({ filter });
+    this.props.actions.setFilter(filter);
   }
 
   renderToggleAll(completedCount) {
@@ -47,8 +43,7 @@ export default class MainSection extends Component {
   }
 
   renderFooter(completedCount) {
-    const { todos } = this.props;
-    const { filter } = this.state;
+    const { todos, filter } = this.props;
     const activeCount = todos.length - completedCount;
 
     if (todos.length) {
@@ -66,9 +61,7 @@ export default class MainSection extends Component {
   }
 
   render() {
-    const { todos, actions } = this.props;
-    const { filter } = this.state;
-
+    const { todos, actions, filter } = this.props;
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
 
