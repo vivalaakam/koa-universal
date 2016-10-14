@@ -1,0 +1,42 @@
+.Topbar {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #3c4350;
+  font-size: 25px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #e4e4e4;
+
+  .auth {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .links {
+    position: relative;
+  }
+
+  .link {
+    margin-right: 10px;
+    color: #e4e4e4;
+    &:last-child {
+      margin-right: 0px;
+    }
+    &:visited {
+      color: #e4e4e4;
+    }
+  }
+
+  .title {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+  }
+}

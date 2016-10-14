@@ -19,6 +19,11 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style',
+          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader')
+      },
+      {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract('style', 'css!less')
       },
@@ -42,6 +47,8 @@ module.exports = {
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.css', {
+      allChunks: true
+    })
   ]
 };

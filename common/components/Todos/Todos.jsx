@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
-import Header from '../components/Header';
-import MainSection from '../components/MainSection';
+import Header from '../Header/Header';
+import MainSection from '../MainSection/MainSection';
+import style from './Todos.scss';
 
 export default function Todos({ actions, todos }) {
   return (
-    <div>
+    <div className={style.Todos}>
       <Header addTodo={actions.addTodo} />
       <MainSection todos={todos} actions={actions} />
     </div>

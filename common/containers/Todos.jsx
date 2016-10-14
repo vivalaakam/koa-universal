@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as todoActions from '../actions/todos';
 import { setTitle } from '../actions/main';
-import TodosWidget from '../components/Todos';
+import TodosWidget from '../components/Todos/Todos';
 
 const state = ({ todos }) => ({ todos });
 

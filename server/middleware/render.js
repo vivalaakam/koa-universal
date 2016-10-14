@@ -1,5 +1,4 @@
 /* eslint no-console: ["error", { allow: ["error"] }] */
-
 import { match } from 'react-router';
 import createMemoryHistory from 'history/lib/createMemoryHistory';
 import storeFactory from '../../common/store';
