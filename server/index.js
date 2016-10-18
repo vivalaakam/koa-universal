@@ -1,7 +1,7 @@
+const hook = require('css-modules-require-hook');
 require('babel-core/register');
 require('babel-polyfill');
 
-var hook = require('css-modules-require-hook');
 
 hook({
   extensions: ['.css', '.scss'],

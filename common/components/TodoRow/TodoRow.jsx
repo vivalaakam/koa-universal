@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import TodoTextInput from '../TodoTextInput/TodoTextInput';
-import style from './TodoItem.scss';
+import style from './TodoRow.scss';
 
-export default class TodoItem extends Component {
+export default class TodoRow extends Component {
 
   static propTypes = {
     todo: PropTypes.object.isRequired,
     updateTodo: PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired,
-    completeTodo: PropTypes.func.isRequired
+    toggleTodo: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
@@ -33,49 +33,48 @@ export default class TodoItem extends Component {
     this.setState({ editing: false });
   }
 
-  render() {
-    const { todo, completeTodo, deleteTodo } = this.props;
-
-    let element;
+  renderElement() {
+    const { todo } = this.props;
     if (this.state.editing) {
-      element = (
-        <TodoTextInput
-          text={todo.text}
-          editing={this.state.editing}
-          onSave={::this.handleSave}
-        />
-      );
-    } else {
-      element = (
-        <div className={style.view}>
-          <input
-            className={style.toggle}
-            type="checkbox"
-            checked={todo.completed}
-            onChange={() => completeTodo(todo)}
-          />
-          <span className={style.label} onDoubleClick={::this.handleDoubleClick}>
-            {todo.text}
-          </span>
-          <button
-            className={style.destroy}
-            onClick={() => deleteTodo(todo.id)}
-          />
-        </div>
+      return (
+        <TodoTextInput text={todo.text} editing={this.state.editing} onSave={::this.handleSave} />
       );
     }
+    return (
+      <span className={style.label}> {todo.text} </span>
+    );
+  }
+
+  render() {
+    const { todo, toggleTodo, deleteTodo } = this.props;
 
     const className = classnames(
-      style.TodoItem
+      style.TodoRow
       , {
         [style.completed]: todo.completed,
         [style.editing]: this.state.editing
       });
 
     return (
-      <li className={className}>
-        {element}
-      </li>
+      <div className={className}>
+        <div className={style.toggleCell}>
+          <input
+            className={style.toggle}
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => toggleTodo(todo)}
+          />
+        </div>
+        <div className={style.mainCell} onDoubleClick={::this.handleDoubleClick}>
+          {this.renderElement()}
+        </div>
+        <div className={style.destroyCell}>
+          <button
+            className={style.destroy}
+            onClick={() => deleteTodo(todo.id)}
+          />
+        </div>
+      </div>
     );
   }
 }

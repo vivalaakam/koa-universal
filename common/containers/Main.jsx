@@ -9,16 +9,10 @@ const actionsDispatch = dispatch => ({
   dispatch
 });
 
-const Main = ({ actions, dispatch }) => {
-  //dispatch(mainActions.setTitle('Main page'));
-  return (
-    <MainWidget {...{ actions }} />
-  );
-};
+const Main = ({ actions }) => <MainWidget {...{ actions }} />;
 
 Main.propTypes = {
-  actions: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 export default connect(state => state, actionsDispatch)(Main);

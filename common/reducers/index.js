@@ -3,7 +3,8 @@ import todos from './todos';
 import auth from './auth';
 import main from './main';
 import filter from './filter';
+import modal from './modal';
 
 export default function (ext) {
-  return combineReducers({ todos, auth, main, filter, ...ext });
+  return combineReducers({ todos, auth, main, filter, modal, ...ext });
 }

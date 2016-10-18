@@ -1,4 +1,40 @@
 .Todos {
+  margin-top: 60px;
+  padding: 10px 20px;
+
+  .navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .add, .filter, .counter, .clearCompleted {
+    flex: 1 0 0;
+  }
+
+  .add, .clearCompleted {
+    text-align: right;
+  }
+
+  .filters {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+  }
+
+  .filterItem {
+    display: inline-block;
+  }
+
+  .table {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+.TodosWrapper {
   min-width: 230px;
   max-width: 550px;
   margin: 130px auto 40px auto;

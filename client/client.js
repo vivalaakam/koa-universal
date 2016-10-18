@@ -4,15 +4,24 @@
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { routerReducer, syncHistoryWithStore } from 'react-router-redux';
+import createSagaMiddleware from 'redux-saga';
 import storeFactory from '../common/store';
 import routes from '../common/routes/index';
 import app from './app';
+import rootSaga from '../common/sagas';
 
 import '../common/style/index.less';
 
 (async function start() {
   const mountNode = document.getElementById('app');
-  const store = await storeFactory({ initialState: window.__INITIAL_STATE__ }, { routing: routerReducer });
+  const sagaMiddleware = createSagaMiddleware();
+  const store = await storeFactory({
+    initialState: window.__INITIAL_STATE__,
+    sagaMiddleware
+  }, { routing: routerReducer });
+
+  sagaMiddleware.run(rootSaga);
+
   const history = syncHistoryWithStore(browserHistory, store);
   const myapp = app(store, history, routes);
 

@@ -1,10 +1,12 @@
 /* eslint no-console: ["error", { allow: ["error"] }] */
 import { match } from 'react-router';
 import createMemoryHistory from 'history/lib/createMemoryHistory';
+import createSagaMiddleware from 'redux-saga';
 import storeFactory from '../../common/store';
 import myRoutes from '../../common/routes';
 import layout from '../layout';
 import app from './app';
+import rootSaga from '../../common/sagas';
 
 function route(history, store, routes) {
   return new Promise((resolve, reject) => {
@@ -23,7 +25,9 @@ function route(history, store, routes) {
 
 export default async function reactRender(ctx) {
   const auth = ctx.state.user;
-  const store = await storeFactory({ initialState: { ...ctx.prefetch, auth } });
+  const sagaMiddleware = createSagaMiddleware();
+  const store = await storeFactory({ initialState: { ...ctx.prefetch, auth }, sagaMiddleware });
+  sagaMiddleware.run(rootSaga);
   const history = createMemoryHistory(ctx.req.url);
   const data = await route(history, store, myRoutes({ store, first: { time: true } }));
   ctx.status = 200;

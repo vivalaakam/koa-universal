@@ -1,0 +1,15 @@
+$main-color: #474f60;
+
+.Inp {
+  border: 1px solid scale-color($main-color, $lightness: 50%);
+  color: $main-color;
+  padding: 8px 18px;
+  border-radius: 3px;
+  width: 100%;
+  resize: none;
+
+  &:focus {
+    outline: none;
+    border-color: $main-color;
+  }
+}

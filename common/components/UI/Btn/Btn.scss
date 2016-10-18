@@ -1,0 +1,43 @@
+$main-color: #80d426;
+
+.Btn {
+  border: 1px solid $main-color;
+  background-color: $main-color;
+  color: #fff;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, .12), 0 1px 11px 0 rgba(0, 0, 0, .24);
+  padding: 8px 18px;
+  margin: 0px 5px;
+
+  &:first-child {
+    margin-left: 0px;
+  }
+
+  &:last-child {
+    margin-left: 0px;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: scale-color($main-color, $lightness: 85%);
+    color: $main-color;
+  }
+
+  &.inverted {
+    background-color: #fff;
+    color: $main-color;
+
+    &:hover, &.active {
+      background-color: $main-color;
+      color: #fff;
+    }
+  }
+}
+
+a.Btn {
+  text-decoration: none;
+}
