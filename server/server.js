@@ -25,7 +25,12 @@ app.use(async(ctx, next) => {
 const compile = webpack(webpackconfig);
 
 app.use(devMiddleware(compile, {
-  publicPath: '/assets/'
+  noInfo: true,
+  publicPath: webpackconfig.output.publicPath,
+  headers: { 'X-Custom-Header': 'yes' },
+  stats: {
+    colors: true
+  }
 }));
 
 app.use(bodyParser());
