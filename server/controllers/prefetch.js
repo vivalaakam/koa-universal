@@ -4,9 +4,9 @@ const todoModel = new Todo();
 
 export default {
   todos: async function fetchTodos(ctx, next) {
-    const todos = await todoModel.list();
+    const list = await todoModel.list();
     ctx.prefetch = {
-      todos
+      todos: { list }
     };
     next();
   }

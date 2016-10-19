@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { createAction } from 'redux-actions';
-import Todos from '../api/todos';
+import Todos from '../../api/todos';
 
 const apiTodos = new Todos();
 
@@ -19,7 +19,7 @@ const TODOS_CLEAR_COMPLETED = Symbol('TODOS_CLEAR_COMPLETED');
 
 const $$initialState = [];
 
-export default function todos($$state = $$initialState, { type, payload }) {
+export default function list($$state = $$initialState, { type, payload }) {
   switch (type) {
     case TODO_ADD:
       return [...$$state, payload];

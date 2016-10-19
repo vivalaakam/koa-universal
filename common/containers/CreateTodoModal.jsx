@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import CreateTodoWidget from '../components/CreateTodo/CreateTodo';
-import { createTodo } from '../reducers/todos';
+import { createTodo } from '../reducers/todos/list';
 import * as modalActions from '../reducers/modal';
 
 const state = ({ modal }) => ({ modal });

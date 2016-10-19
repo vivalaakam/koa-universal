@@ -1,10 +1,15 @@
 import { combineReducers } from 'redux';
-import todos from './todos';
+import todosList from './todos/list';
+import todosFilter from './todos/filter';
 import auth from './auth';
 import main from './main';
-import filter from './filter';
 import modal from './modal';
 
+const todos = combineReducers({
+  filter: todosFilter,
+  list: todosList
+});
+
 export default function (ext) {
-  return combineReducers({ todos, auth, main, filter, modal, ...ext });
+  return combineReducers({ todos, auth, main, modal, ...ext });
 }

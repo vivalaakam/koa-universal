@@ -7,7 +7,7 @@ const FILTER_ACTIVE = Symbol('FILTER_ACTIVE');
 
 const $$initialState = FILTER_ALL;
 
-export default function auth($$state = $$initialState, action) {
+export default function filter($$state = $$initialState, action) {
   switch (action.type) {
     case SET_FILTER:
       return action.payload;

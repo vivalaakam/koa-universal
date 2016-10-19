@@ -6,7 +6,7 @@ import {
   watchToggleTodo,
   watchCompleteAllTodos,
   watchClearCompletedTodos
-} from '../reducers/todos';
+} from '../reducers/todos/list';
 
 export default function* rootSaga() {
   yield [

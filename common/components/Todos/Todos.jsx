@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import deferred from 'deferred';
 import Btn from '../UI/Btn/Btn';
 import TodoRow from '../TodoRow/TodoRow';
-import { FILTER_ALL, FILTER_COMPLETED, FILTER_ACTIVE } from '../../reducers/filter';
+import { FILTER_ALL, FILTER_COMPLETED, FILTER_ACTIVE } from '../../reducers/todos/filter';
 import style from './Todos.scss';
 
 const FILTER_TITLES = {
@@ -20,7 +20,7 @@ const TODO_FILTERS = {
 export default class Todos extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    todos: PropTypes.array.isRequired,
+    list: PropTypes.array.isRequired,
     filter: PropTypes.symbol.isRequired
   };
 
@@ -58,8 +58,8 @@ export default class Todos extends Component {
   }
 
   renderTodoCount(completed) {
-    const { todos } = this.props;
-    const activeCount = todos.length - completed;
+    const { list } = this.props;
+    const activeCount = list.length - completed;
     const itemWord = activeCount === 1 ? 'item' : 'items';
 
     return (
@@ -82,9 +82,9 @@ export default class Todos extends Component {
   }
 
   render() {
-    const { todos, filter } = this.props;
-    const filteredTodos = todos.filter(TODO_FILTERS[filter]);
-    const completed = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
+    const { list, filter } = this.props;
+    const filteredTodos = list.filter(TODO_FILTERS[filter]);
+    const completed = list.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
     return (
       <div className={style.Todos}>
         <div className={style.navigation}>
