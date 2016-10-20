@@ -20,10 +20,9 @@ const actionsDispatch = dispatch => ({
   dispatch
 });
 
-const Todos = ({ todos : { list, filter }, actions }) => (
+const Todos = ({ todos: { list, filter }, actions }) => (
   <TodosWidget {...{ list, filter, actions }} />
 );
-
 
 Todos.propTypes = {
   actions: PropTypes.object.isRequired,

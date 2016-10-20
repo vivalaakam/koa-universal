@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as mainActions from '../actions/main';
 import MainWidget from '../components/Main';
 
 const actionsDispatch = dispatch => ({
-  actions: bindActionCreators(mainActions, dispatch),
+  actions: bindActionCreators({}, dispatch),
   dispatch
 });
 

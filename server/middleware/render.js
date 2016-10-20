@@ -26,9 +26,9 @@ function route(history, store, routes) {
 export default async function reactRender(ctx) {
   const auth = ctx.state.user;
   const sagaMiddleware = createSagaMiddleware();
-  const store = await storeFactory({ initialState: { ...ctx.prefetch, auth }, sagaMiddleware });
-  sagaMiddleware.run(rootSaga);
   const history = createMemoryHistory(ctx.req.url);
+  const store = await storeFactory({ initialState: { ...ctx.prefetch, auth }, sagaMiddleware, history });
+  sagaMiddleware.run(rootSaga);
   const data = await route(history, store, myRoutes({ store, first: { time: true } }));
   ctx.status = 200;
   ctx.body = layout(data);

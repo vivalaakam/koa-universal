@@ -1,13 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as authActions from '../actions/auth';
 import TopbarWidget from '../components/Topbar/Topbar';
 
 const state = ({ auth, main }) => ({ auth, main });
 
 const actionsDispatch = dispatch => ({
-  actions: bindActionCreators(authActions, dispatch),
+  actions: bindActionCreators({}, dispatch),
   dispatch
 });
 

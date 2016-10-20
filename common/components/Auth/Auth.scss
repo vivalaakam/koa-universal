@@ -1,0 +1,24 @@
+$main-color: #474f60;
+
+.Auth {
+  position: absolute;
+  width: 300px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid scale-color($main-color, $lightness: 50%);
+
+  .row {
+    margin-bottom: 15px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

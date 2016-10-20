@@ -9,15 +9,14 @@ export default new Strategy(async(username, password, done) => {
   if (users.length > 0) {
     const user = users[0];
     if (!bcrypt.compareSync(password, user.password)) {
-      return done(null, false, {
-        message: 'Incorrect password.',
-        state: 'wrongpass'
-      });
+      return done(null, false, JSON.stringify({
+        message: 'Incorrect password.'
+      }));
     }
     delete user.password;
     return done(null, user);
   }
-  const user = auth.create({
+  const user = await auth.create({
     username,
     password: bcrypt.hashSync(password, 8)
   });

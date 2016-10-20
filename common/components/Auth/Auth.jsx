@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import Inp from '../UI/Inp/Inp';
+import Btn from '../UI/Btn/Btn';
+import style from './Auth.scss';
 
 export default class Auth extends Component {
 
@@ -20,7 +23,18 @@ export default class Auth extends Component {
 
   submitAuth() {
     const { actions } = this.props;
-    actions.authentificate(this.refEmail.value, this.refPassword.value);
+
+    if (this.refEmail.value === '') {
+      actions.errorAuth('Field email can`t be blank');
+      return;
+    }
+
+    if (this.refPassword.value === '') {
+      actions.errorAuth('Field password can`t be blank');
+      return;
+    }
+
+    actions.authentificate({ username: this.refEmail.value, password: this.refPassword.value });
   }
 
   success() {
@@ -45,18 +59,20 @@ export default class Auth extends Component {
 
   render() {
     return (
-      <div>
+      <div className={style.Auth}>
         {this.getError()}
-        <div>
-          <input type="email" ref={c => (this.refEmail = c)} />
+        <div className={style.row}>
+          <Inp type="email" link={c => (this.refEmail = c)} placeholder="email" />
         </div>
-        <div>
-          <input type="password" ref={c => (this.refPassword = c)} />
+        <div className={style.row}>
+          <Inp type="password" link={c => (this.refPassword = c)} placeholder="passport" />
         </div>
-        <div>
-          <button onClick={::this.submitAuth}>Submit</button>
+        <div className={style.row}>
+          <Btn className={style.btn} onClick={::this.submitAuth}>Submit</Btn>
         </div>
-        <button onClick={::this.github}>Login via Github</button>
+        <div className={style.row}>
+          <Btn className={style.btn} scheme="github" onClick={::this.github}>Login via GitHub</Btn>
+        </div>
       </div>
     );
   }

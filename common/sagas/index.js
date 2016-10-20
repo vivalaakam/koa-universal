@@ -7,6 +7,7 @@ import {
   watchCompleteAllTodos,
   watchClearCompletedTodos
 } from '../reducers/todos/list';
+import { watchFetchAuth, watchAuthentificate } from '../reducers/auth';
 
 export default function* rootSaga() {
   yield [
@@ -16,6 +17,8 @@ export default function* rootSaga() {
     watchDeleteTodo(),
     watchToggleTodo(),
     watchCompleteAllTodos(),
-    watchClearCompletedTodos()
+    watchClearCompletedTodos(),
+    watchFetchAuth(),
+    watchAuthentificate()
   ];
 }

@@ -17,7 +17,8 @@ import '../common/style/index.less';
   const sagaMiddleware = createSagaMiddleware();
   const store = await storeFactory({
     initialState: window.__INITIAL_STATE__,
-    sagaMiddleware
+    sagaMiddleware,
+    history: browserHistory
   }, { routing: routerReducer });
 
   sagaMiddleware.run(rootSaga);

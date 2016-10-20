@@ -1,9 +1,11 @@
-$main-color: #80d426;
+$main-color: #474f60;
+$blue-color: #4ba9df;
+$green-color: #80d426;
+$orange-color: #f4b723;
+$github-color: #3c4146;
 
 .Btn {
-  border: 1px solid $main-color;
-  background-color: $main-color;
-  color: #fff;
+
   border-radius: 3px;
   text-transform: uppercase;
   font-weight: 600;
@@ -23,17 +25,110 @@ $main-color: #80d426;
   }
   &:hover {
     cursor: pointer;
-    background-color: scale-color($main-color, $lightness: 85%);
-    color: $main-color;
   }
 
-  &.inverted {
-    background-color: #fff;
-    color: $main-color;
+  &.defaultScheme {
+    border: 1px solid $main-color;
+    background-color: $main-color;
+    color: #fff;
 
-    &:hover, &.active {
-      background-color: $main-color;
-      color: #fff;
+    &:hover {
+      background-color: scale-color($main-color, $lightness: 85%);
+      color: $main-color;
+    }
+
+    &.inverted {
+      background-color: #fff;
+      color: $main-color;
+
+      &:hover, &.active {
+        background-color: $main-color;
+        color: #fff;
+      }
+    }
+  }
+
+  &.blueScheme {
+    border: 1px solid $blue-color;
+    background-color: $blue-color;
+    color: #fff;
+
+    &:hover {
+      background-color: scale-color($blue-color, $lightness: 85%);
+      color: $blue-color;
+    }
+
+    &.inverted {
+      background-color: #fff;
+      color: $blue-color;
+
+      &:hover, &.active {
+        background-color: $blue-color;
+        color: #fff;
+      }
+    }
+  }
+
+  &.greenScheme {
+    border: 1px solid $green-color;
+    background-color: $green-color;
+    color: #fff;
+
+    &:hover {
+      background-color: scale-color($green-color, $lightness: 85%);
+      color: $green-color;
+    }
+
+    &.inverted {
+      background-color: #fff;
+      color: $green-color;
+
+      &:hover, &.active {
+        background-color: $green-color;
+        color: #fff;
+      }
+    }
+  }
+
+  &.orangeScheme {
+    border: 1px solid $orange-color;
+    background-color: $orange-color;
+    color: #fff;
+
+    &:hover {
+      background-color: scale-color($orange-color, $lightness: 85%);
+      color: $orange-color;
+    }
+
+    &.inverted {
+      background-color: #fff;
+      color: $orange-color;
+
+      &:hover, &.active {
+        background-color: $orange-color;
+        color: #fff;
+      }
+    }
+  }
+
+  &.githubScheme {
+    border: 1px solid $github-color;
+    background-color: $github-color;
+    color: #fff;
+
+    &:hover {
+      background-color: scale-color($github-color, $lightness: 85%);
+      color: $github-color;
+    }
+
+    &.inverted {
+      background-color: #fff;
+      color: $github-color;
+
+      &:hover, &.active {
+        background-color: $github-color;
+        color: #fff;
+      }
     }
   }
 }

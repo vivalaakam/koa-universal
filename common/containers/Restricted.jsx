@@ -2,12 +2,11 @@ import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushState } from 'redux-router';
-import * as authActions from '../actions/auth';
 
 const state = ({ auth }) => ({ auth });
 
 const actionsDispatch = dispatch => ({
-  actions: bindActionCreators({ ...authActions, pushState }, dispatch),
+  actions: bindActionCreators({ pushState }, dispatch),
   dispatch
 });
 

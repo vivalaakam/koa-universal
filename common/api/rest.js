@@ -37,7 +37,12 @@ export default class Rest {
     return fetch(url, {
       ...this.basic
     })
-      .then(response => response.json());
+      .then((response) => {
+        if (!response.ok) {
+          return Rest.handleError(response);
+        }
+        return response.json();
+      });
   }
 
   postQuery(url, data) {
@@ -46,7 +51,12 @@ export default class Rest {
       method: 'POST',
       body: JSON.stringify(data)
     })
-      .then(response => response.json());
+      .then((response) => {
+        if (!response.ok) {
+          return Rest.handleError(response);
+        }
+        return response.json();
+      });
   }
 
   putQuery(url, data) {
@@ -55,7 +65,12 @@ export default class Rest {
       method: 'PUT',
       body: JSON.stringify(data)
     })
-      .then(response => response.json());
+      .then((response) => {
+        if (!response.ok) {
+          return Rest.handleError(response);
+        }
+        return response.json();
+      });
   }
 
   deleteQuery(url) {
@@ -63,6 +78,16 @@ export default class Rest {
       method: 'DELETE',
       ...this.basic
     })
-      .then(response => response.status === 204 || response.json());
+      .then((response) => {
+        if (!response.ok) {
+          return Rest.handleError(response);
+        }
+        return true;
+      });
+  }
+
+  static async handleError(response) {
+    const resp = await response.json();
+    throw new Error(resp.message);
   }
 }
