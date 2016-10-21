@@ -1,14 +1,19 @@
 .TodoRow {
   position: relative;
-  font-size: 24px;
+  font-size: 14px;
   line-height: 28px;
   border-bottom: 1px solid #ededed;
-  font-weight: 300;
   display: flex;
 
   & > div {
     padding: 7px 15px;
     background-color: #fff;
+  }
+
+  &.editing {
+    .mainCell {
+      padding: 3px 5px;
+    }
   }
 
   .mainCell {
