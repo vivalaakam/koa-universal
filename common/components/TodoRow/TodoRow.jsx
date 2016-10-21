@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import TodoTextInput from '../TodoTextInput/TodoTextInput';
+import Checkbox from '../UI/Checkbox/Checkbox';
 import style from './TodoRow.scss';
 
 export default class TodoRow extends Component {
@@ -58,12 +59,7 @@ export default class TodoRow extends Component {
     return (
       <div className={className}>
         <div className={style.toggleCell}>
-          <input
-            className={style.toggle}
-            type="checkbox"
-            checked={todo.completed}
-            onChange={() => toggleTodo(todo)}
-          />
+          <Checkbox checked={todo.completed} onChange={() => toggleTodo(todo)} />
         </div>
         <div className={style.mainCell} onDoubleClick={::this.handleDoubleClick}>
           {this.renderElement()}

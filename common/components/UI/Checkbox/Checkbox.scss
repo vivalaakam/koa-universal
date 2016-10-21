@@ -1,0 +1,97 @@
+$main-color: #474f60;
+$disabled-color: #8e9598;
+
+.Checkbox {
+  position: relative;
+  margin: 16px 0;
+  line-height: 22px;
+  display: block;
+
+  &.checked {
+    .wrapper {
+      border-color: $main-color;
+      background-color: $main-color;
+
+      &:after {
+        height: 7px;
+      }
+
+      &:before {
+        height: 12px;
+      }
+    }
+  }
+
+  &.disabled {
+    .wrapper {
+      border-color: $disabled-color;
+      background-color: $disabled-color;
+      cursor: default;
+
+      span {
+        color: $disabled-color;
+      }
+    }
+  }
+
+  .wrapper {
+    float: left;
+    user-select: none;
+    height: 18px;
+    width: 18px;
+    background-color: transparent;
+    border: 2px solid $main-color;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    box-sizing: border-box;
+    transition: border-color ease .1s;
+    cursor: pointer;
+
+    &:before, &:after {
+      box-sizing: border-box;
+      position: absolute;
+      height: 0;
+      width: 2px;
+      background-color: #fff;
+      display: inline-block;
+      transform-origin: left top;
+      border-radius: 0px;
+      content: ' ';
+      transition: opacity ease .5s;
+    }
+
+    &:before {
+      top: 12.6px;
+      left: 6px;
+      transform: rotate(-135deg);
+    }
+
+    &:after {
+      top: 8px;
+      left: 1px;
+      transform: rotate(-45deg);
+    }
+
+    .input {
+      top: 0;
+      left: 0;
+      z-index: 1;
+      cursor: pointer;
+      opacity: 0;
+      margin: 0;
+      position: absolute;
+    }
+  }
+
+  .text {
+    display: block;
+    line-height: 15px;
+    margin-left: 24px;
+    vertical-align: top;
+    white-space: nowrap;
+    color: $main-color;
+  }
+}
