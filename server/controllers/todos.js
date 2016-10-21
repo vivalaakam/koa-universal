@@ -28,11 +28,13 @@ export default {
     ctx.status = 204;
   },
   completeAllItems: async function completeAllItems(ctx) {
-    const data = await todoModel.completeAll();
+    const auth = ctx.state.user;
+    const data = await todoModel.completeAll({ user_id: auth.id });
     ctx.body = data;
   },
   clearCompletedItems: async function clearCompletedItems(ctx) {
-    const data = await todoModel.clearCompleted();
+    const auth = ctx.state.user;
+    const data = await todoModel.clearCompleted({ user_id: auth.id });
     ctx.body = data;
   }
 };

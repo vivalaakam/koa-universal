@@ -26,7 +26,7 @@ export default class TodoRow extends Component {
   handleSave(text) {
     const { todo } = this.props;
     if (text.length === 0) {
-      this.props.deleteTodo(todo.id);
+      this.props.deleteTodo(todo);
     } else {
       this.props.updateTodo({ ...todo, text });
     }
@@ -71,7 +71,7 @@ export default class TodoRow extends Component {
         <div className={style.destroyCell}>
           <button
             className={style.destroy}
-            onClick={() => deleteTodo(todo.id)}
+            onClick={() => deleteTodo(todo)}
           />
         </div>
       </div>

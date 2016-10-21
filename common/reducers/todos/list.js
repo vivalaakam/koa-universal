@@ -24,7 +24,7 @@ export default function list($$state = $$initialState, { type, payload }) {
     case TODO_ADD:
       return [...$$state, payload];
     case TODO_DESTROY:
-      return $$state.filter(todo => todo.id !== payload.id);
+      return $$state.filter(todo => todo.id !== payload);
     case TODO_RESET:
       return $$state.map(todo => (todo.id === payload.id ? Object.assign({}, todo, payload) : todo));
     case TODOS_RESET:

@@ -1,14 +1,21 @@
-import RethinkDB, { r } from './rethinkdb';
+import Sequelize from 'sequelize';
+import Postgres from './postgres';
 
-export default class Auth extends RethinkDB {
+export default class Auth extends Postgres {
   constructor() {
-    super('users');
-  }
-
-  async login() {
-    const db = await this.db();
-    const result = await r.table(this.collection).filter({ completed: false }).update({ completed: true }).run(db);
-    return result.replaced && this.list();
+    super('users', {
+      id: {
+        type: Sequelize.UUID,
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4
+      },
+      username: {
+        type: Sequelize.STRING
+      },
+      password: {
+        type: Sequelize.STRING
+      }
+    });
   }
 
   async getAll(username, type) {
