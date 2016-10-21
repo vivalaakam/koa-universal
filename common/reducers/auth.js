@@ -2,6 +2,7 @@ import { put } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { takeEvery } from 'redux-saga';
 import { createAction } from 'redux-actions';
+import { merge } from '../helpers/ramda';
 import Auth from '../api/auth';
 
 const apiAuth = new Auth();
@@ -18,7 +19,7 @@ export default function auth($$state = $$initialState, { type, payload }) {
     case AUTH_CURRENT:
       return payload;
     case AUTH_ERROR:
-      return { ...$$state, error: payload };
+      return merge($$state, { error: payload });
     default:
       return $$state;
   }

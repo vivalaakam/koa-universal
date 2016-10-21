@@ -1,6 +1,7 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { createAction } from 'redux-actions';
+import { append, removeByKey, replace } from '../../helpers/ramda';
 import Todos from '../../api/todos';
 
 const apiTodos = new Todos();
@@ -22,11 +23,11 @@ const $$initialState = [];
 export default function list($$state = $$initialState, { type, payload }) {
   switch (type) {
     case TODO_ADD:
-      return [...$$state, payload];
+      return append($$state, payload);
     case TODO_DESTROY:
-      return $$state.filter(todo => todo.id !== payload);
+      return removeByKey($$state, payload);
     case TODO_RESET:
-      return $$state.map(todo => (todo.id === payload.id ? Object.assign({}, todo, payload) : todo));
+      return replace($$state, [payload]);
     case TODOS_RESET:
       return payload;
     default:
