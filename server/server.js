@@ -9,10 +9,10 @@ import { devMiddleware } from 'koa-webpack-middleware';
 import routes from './routes';
 import passport from './passport';
 import webpackconfig from '../webpack.config';
-
+const port = process.env.PORT || 3000;
 const app = new Koa();
 
-app.keys = ['some secret hurr'];
+app.keys = [process.env.SECRET_KEY];
 
 app.use(convert(session(app)));
 app.use(async(ctx, next) => {
@@ -42,6 +42,6 @@ app
   .use(routes.routes())
   .use(routes.allowedMethods());
 
-app.listen(3000, () => {
-  console.log('App listening at port 3000');
+app.listen(port, () => {
+  console.log(`App listening at port ${port}`);
 });
