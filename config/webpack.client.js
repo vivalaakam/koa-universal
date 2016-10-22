@@ -3,7 +3,6 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
-  devtool: 'source-map',
   entry: {
     client: ['babel-polyfill', path.join(__dirname, '../client/client.js')]
   },

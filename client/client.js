@@ -21,6 +21,12 @@ import '../common/style/index.less';
     history: browserHistory
   }, { routing: routerReducer });
 
+  if (module.hot) {
+    module.hot.accept('../common/reducers', () =>
+      store.replaceReducer(require('../common/reducers'))
+    );
+  }
+
   sagaMiddleware.run(rootSaga);
 
   const history = syncHistoryWithStore(browserHistory, store);
