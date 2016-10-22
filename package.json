@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js --harmony-generators ",
-    "migrate": "node_modules/sequelize-cli/bin/sequelize db:migrate",
+    "migrate": "node_modules/sequelize-cli/bin/sequelize db:migrate --models-path 'server/models'",
     "postinstall": "npm run migrate",
     "eslint": "eslint --ext .js --ext .jsx ./",
     "test": "cross-env NODE_ENV=test cross-env NODE_PATH=./ mocha --compilers js:babel-register -r spec/setup.mocha.js --recursive 'spec/**/*.test.js'"

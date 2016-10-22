@@ -1,21 +1,16 @@
-import Sequelize from 'sequelize';
+import { sequelize } from './adapter';
+
+const defaults = {
+  timestamps: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at'
+};
+
+export { sequelize, defaults };
 
 export default class Postgres {
-
-  constructor(collection, fields) {
-    this.collection = this.db().define(collection, fields, {
-      timestamps: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at'
-    });
-  }
-
-  db() {
-    if (!this.connection) {
-      this.connection = new Sequelize(process.env.DATABASE_URL);
-    }
-
-    return this.connection;
+  constructor(collection) {
+    this.collection = collection;
   }
 
   async list(filter = {}) {
