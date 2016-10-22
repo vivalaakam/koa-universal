@@ -10,8 +10,8 @@ const config = {
   output: {
     filename: 'js/[name].js',
     sourceMapFilename: '[name].js.map',
-    path: path.join(__dirname, 'assets/'),
-    publicPath: '/assets/'
+    path: path.join(__dirname, '/../assets/'),
+    publicPath: '/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
