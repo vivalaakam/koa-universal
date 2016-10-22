@@ -5,13 +5,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = {
   devtool: 'source-map',
   entry: {
-    client: ['babel-polyfill', path.join(__dirname, 'client/client.js')]
+    client: ['babel-polyfill', path.join(__dirname, '../client/client.js')]
   },
   output: {
     filename: 'js/[name].js',
     sourceMapFilename: '[name].js.map',
-    path: path.join(__dirname, 'assets/'),
-    publicPath: '/assets/'
+    path: path.join(__dirname, '/../assets/'),
+    publicPath: '/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']

@@ -1,24 +1,25 @@
-import Sequelize from 'sequelize';
-import Postgres from './postgres';
+import Postgres, { Sequelize, sequelize, defaults } from './postgres';
+
+const model = sequelize.define('todos', {
+  id: {
+    type: Sequelize.UUID,
+    primaryKey: true,
+    defaultValue: Sequelize.UUIDV4
+  },
+  text: {
+    type: Sequelize.STRING
+  },
+  completed: {
+    type: Sequelize.BOOLEAN
+  },
+  user_id: {
+    type: Sequelize.UUID
+  }
+}, defaults);
 
 export default class Todo extends Postgres {
   constructor() {
-    super('todos', {
-      id: {
-        type: Sequelize.UUID,
-        primaryKey: true,
-        defaultValue: Sequelize.UUIDV4
-      },
-      text: {
-        type: Sequelize.STRING
-      },
-      completed: {
-        type: Sequelize.BOOLEAN
-      },
-      user_id: {
-        type: Sequelize.UUID
-      }
-    });
+    super(model);
   }
 
   async completeAll(filter) {
@@ -35,3 +36,7 @@ export default class Todo extends Postgres {
     return this.list(filter);
   }
 }
+
+export {
+  model
+};

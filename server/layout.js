@@ -3,7 +3,7 @@ export default (locals = { storeState: {}, content: '' }) => (`
     <head>
       <meta charset="utf-8" />
       <title>Boilerplate</title>
-      <link href="/assets/styles.css" rel="stylesheet" />
+      <link href="/styles.css" rel="stylesheet" />
     </head>
     <body>
       <div id="app">${locals.content}</div>
@@ -11,7 +11,7 @@ export default (locals = { storeState: {}, content: '' }) => (`
         window.__INITIAL_STATE__ = ${JSON.stringify(locals.storeState)}
       </script>
 
-      <script src="/assets/js/client.js"></script>
+      <script src="/js/client.js"></script>
     </body>
   </html>
 `);

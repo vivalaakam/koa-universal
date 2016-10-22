@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js --harmony-generators ",
-    "migrate": "node_modules/sequelize-cli/bin/sequelize db:migrate",
-    "postinstall": "npm run migrate",
+    "migrate": "node_modules/sequelize-cli/bin/sequelize db:migrate --models-path 'server/models'",
+    "postinstall": "npm run migrate && npm run build",
     "eslint": "eslint --ext .js --ext .jsx ./",
-    "test": "cross-env NODE_ENV=test cross-env NODE_PATH=./ mocha --compilers js:babel-register -r spec/setup.mocha.js --recursive 'spec/**/*.test.js'"
+    "test": "cross-env NODE_ENV=test cross-env NODE_PATH=./ mocha --compilers js:babel-register -r spec/setup.mocha.js --recursive 'spec/**/*.test.js'",
+    "build": "webpack --config config/webpack.client.js",
+    "watch": "webpack --config config/webpack.client.js --watch"
   },
   "author": "",
   "license": "ISC",
@@ -38,10 +40,12 @@
     "koa": "^2.0.0",
     "koa-bodyparser": "^3.1.0",
     "koa-convert": "^1.2.0",
+    "koa-favicon": "^1.2.1",
     "koa-passport": "^2.2.1",
     "koa-render": "^0.2.1",
     "koa-router": "^7.0.1",
     "koa-session": "^3.3.1",
+    "koa-static": "^2.0.0",
     "koa-webpack-middleware": "^1.0.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
