@@ -4,18 +4,17 @@ import Koa from 'koa';
 import session from 'koa-session';
 import convert from 'koa-convert';
 import favicon from 'koa-favicon';
+import assets from 'koa-static';
 import bodyParser from 'koa-bodyparser';
-import webpack from 'webpack';
-import { devMiddleware } from 'koa-webpack-middleware';
 import routes from './routes';
 import passport from './passport';
-import webpackconfig from '../webpack.config';
 
 const port = process.env.PORT || 3000;
 const app = new Koa();
 
 app.keys = [process.env.SECRET_KEY];
 app.use(favicon(`${__dirname}/../favicon.ico`));
+app.use(assets(`${__dirname}/../assets`));
 
 app.use(convert(session(app)));
 app.use(async(ctx, next) => {
@@ -25,16 +24,6 @@ app.use(async(ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
-const compile = webpack(webpackconfig);
-
-app.use(devMiddleware(compile, {
-  noInfo: true,
-  publicPath: webpackconfig.output.publicPath,
-  headers: { 'X-Custom-Header': 'yes' },
-  stats: {
-    colors: true
-  }
-}));
 
 app.use(bodyParser());
 
