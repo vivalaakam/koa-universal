@@ -1,4 +1,4 @@
-import { sequelize } from './adapter';
+import { sequelize, Sequelize } from './adapter';
 
 const defaults = {
   timestamps: true,
@@ -6,7 +6,7 @@ const defaults = {
   updatedAt: 'updated_at'
 };
 
-export { sequelize, defaults };
+export { Sequelize, sequelize, defaults };
 
 export default class Postgres {
   constructor(collection) {

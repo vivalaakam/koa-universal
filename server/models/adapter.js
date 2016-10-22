@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const configFull = require(__dirname + '/../../config/config.json');
+import Sequelize from 'sequelize';
+import configFull from './../../config/config.json';
 
 const env = process.env.NODE_ENV || 'development';
 const config = configFull[env];
@@ -10,6 +10,6 @@ if (process.env.DATABASE_URL) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-module.export = {
+export {
   sequelize, Sequelize
 };
