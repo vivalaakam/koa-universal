@@ -12,6 +12,7 @@ $github-color: #3c4146;
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, .12), 0 1px 11px 0 rgba(0, 0, 0, .24);
   padding: 8px 18px;
   margin: 0px 5px;
+  vertical-align: top;
 
   &:first-child {
     margin-left: 0px;
@@ -32,7 +33,7 @@ $github-color: #3c4146;
     background-color: $main-color;
     color: #fff;
 
-    &:hover {
+    &:hover, &.active {
       background-color: scale-color($main-color, $lightness: 85%);
       color: $main-color;
     }
@@ -53,7 +54,7 @@ $github-color: #3c4146;
     background-color: $blue-color;
     color: #fff;
 
-    &:hover {
+    &:hover, &.active {
       background-color: scale-color($blue-color, $lightness: 85%);
       color: $blue-color;
     }
@@ -74,7 +75,7 @@ $github-color: #3c4146;
     background-color: $green-color;
     color: #fff;
 
-    &:hover {
+    &:hover, &.active {
       background-color: scale-color($green-color, $lightness: 85%);
       color: $green-color;
     }
@@ -95,7 +96,7 @@ $github-color: #3c4146;
     background-color: $orange-color;
     color: #fff;
 
-    &:hover {
+    &:hover, &.active {
       background-color: scale-color($orange-color, $lightness: 85%);
       color: $orange-color;
     }
@@ -116,7 +117,7 @@ $github-color: #3c4146;
     background-color: $github-color;
     color: #fff;
 
-    &:hover {
+    &:hover, &.active {
       background-color: scale-color($github-color, $lightness: 85%);
       color: $github-color;
     }

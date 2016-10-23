@@ -14,8 +14,9 @@ export default class CreateTodo extends Component {
   }
 
   onSubmit() {
-    this.props.actions.createTodo({ text: this.refTodo.value, completed: false });
-    this.props.actions.hideModal();
+    if (this.refTodo.value) {
+      this.props.actions.createTodoModal({ text: this.refTodo.value, completed: false });
+    }
   }
 
   render() {
@@ -32,7 +33,7 @@ export default class CreateTodo extends Component {
     };
 
     return (
-      <Modal {...params}>
+      <Modal {...params} modal={this.props.modal}>
         <div className={style.row}>
           <Inp className={style.inp} link={c => (this.refTodo = c)} placeholder="What needs to be done?" />
         </div>

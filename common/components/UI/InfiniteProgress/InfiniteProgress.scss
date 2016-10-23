@@ -1,0 +1,53 @@
+$main-color: #474f60;
+
+@keyframes fillDot {
+  0% {
+    background: scale-color($main-color, $lightness: 50%);
+  }
+  33% {
+    background: scale-color($main-color, $lightness: 25%);
+  }
+  66% {
+    background: scale-color($main-color, $lightness: 75%);
+  }
+}
+
+.InfiniteProgress {
+  position: relative;
+  padding: 2px 20px;
+  text-align: center;
+  .dot {
+    display: inline-block;
+    position: relative;
+    animation: fillDot 1.5s ease-in-out 0.5s infinite;
+
+    &:last-child {
+      margin-right: 0px;
+    }
+
+    &:after, &:before {
+      content: '';
+      position: absolute;
+      top: -1px;
+    }
+
+    &:before {
+      left: -21px;
+      animation: fillDot 1.5s ease-in-out 0s infinite;
+    }
+
+    &:after {
+      right: -21px;
+      animation: fillDot 1.5s ease-in-out 1s infinite;
+    }
+
+    &, &:after, &:before {
+      height: 11px;
+      width: 11px;
+      border: 1px solid $main-color;
+      border-radius: 50%;
+      background-color: scale-color($main-color, $lightness: 75%);
+    }
+  }
+
+}

@@ -30,7 +30,7 @@ class Modal extends Component {
     }
     const Comp = MODAL_COMPONENTS[modal.type];
     return (
-      <Comp {...modal.props} actions={actions} promise={modal.promise} />
+      <Comp {...modal.props} actions={actions} promise={modal.promise} modal={modal} />
     );
   }
 }
