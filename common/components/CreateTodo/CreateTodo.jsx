@@ -24,18 +24,20 @@ export default class CreateTodo extends Component {
       title: 'Create todo',
       resolve: {
         title: 'Create',
-        action: ::this.onSubmit
+        action: ::this.onSubmit,
+        name: 'resolve'
       },
       reject: {
         title: 'Cancel',
-        action: ::this.onReject
+        action: ::this.onReject,
+        name: 'reject'
       }
     };
 
     return (
       <Modal {...params} modal={this.props.modal}>
         <div className={style.row}>
-          <Inp className={style.inp} link={c => (this.refTodo = c)} placeholder="What needs to be done?" />
+          <Inp className={style.inp} name="text" link={c => (this.refTodo = c)} placeholder="What needs to be done?" />
         </div>
       </Modal>
     );

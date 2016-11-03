@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Inp from '../UI/Inp/Inp';
-import Btn from '../UI/Btn/Btn';
+import classnames from 'classnames';
+import { Inp, Btn } from '../UI';
 import style from './Auth.scss';
 
 export default class Auth extends Component {
@@ -62,13 +62,16 @@ export default class Auth extends Component {
       <div className={style.Auth}>
         {this.getError()}
         <div className={style.row}>
-          <Inp type="email" link={c => (this.refEmail = c)} placeholder="email" />
+          <Inp type="email" name="email" link={c => (this.refEmail = c)} placeholder="email" />
         </div>
         <div className={style.row}>
-          <Inp type="password" link={c => (this.refPassword = c)} placeholder="passport" />
+          <Inp type="password" name="password" link={c => (this.refPassword = c)} placeholder="passport" />
         </div>
         <div className={style.row}>
-          <Btn className={style.btn} onClick={::this.submitAuth}>Submit</Btn>
+          <Btn
+            className={classnames(style.btn, 'submit')}
+            onClick={::this.submitAuth}
+          >Submit</Btn>
         </div>
         <div className={style.row}>
           <Btn className={style.btn} scheme="github" onClick={::this.github}>Login via GitHub</Btn>

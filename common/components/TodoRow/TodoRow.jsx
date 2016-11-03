@@ -4,6 +4,8 @@ import TodoTextInput from '../TodoTextInput/TodoTextInput';
 import Checkbox from '../UI/Checkbox/Checkbox';
 import style from './TodoRow.scss';
 
+export { style };
+
 export default class TodoRow extends Component {
 
   static propTypes = {
@@ -41,9 +43,7 @@ export default class TodoRow extends Component {
         <TodoTextInput text={todo.text} editing={this.state.editing} onSave={::this.handleSave} />
       );
     }
-    return (
-      <span className={style.label}> {todo.text} </span>
-    );
+    return todo.text;
   }
 
   render() {
@@ -59,7 +59,7 @@ export default class TodoRow extends Component {
     return (
       <div className={className}>
         <div className={style.toggleCell}>
-          <Checkbox checked={todo.completed} onChange={() => toggleTodo(todo)} />
+          <Checkbox checked={todo.completed} onChange={() => toggleTodo(todo)} name="toggle" />
         </div>
         <div className={style.mainCell} onDoubleClick={::this.handleDoubleClick}>
           {this.renderElement()}
