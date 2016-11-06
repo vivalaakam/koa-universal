@@ -1,8 +1,8 @@
 {
-  "name": "test",
+  "name": "universal-web-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "vivalaakam <viva.la.akam@gmail.com>",
+  "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js --harmony-generators ",
     "migrate": "node_modules/sequelize-cli/bin/sequelize db:migrate --models-path 'server/models'",
