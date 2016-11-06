@@ -1,4 +1,8 @@
+import jwt from 'jsonwebtoken';
 import passport from '../passport';
+import Auth from '../models/auth';
+
+const authModel = new Auth();
 
 export default {
   auth(ctx, next) {
@@ -9,6 +13,8 @@ export default {
         return false;
       }
       ctx.body = user;
+      const token = jwt.sign({ id: user.id, iat: Math.floor(Date.now() / 1000) }, process.env.SECRET_KEY);
+      ctx.set('Authorization', `JWT ${token}`);
       return ctx.login(user);
     })(ctx, next);
   },
@@ -32,5 +38,20 @@ export default {
         }
       </script>`;
     ctx.status = 200;
+  },
+  check: async function check(ctx, next) {
+    try {
+      const token = ctx.get('Authorization').split(' ')[1];
+      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      const current = ctx.state.user;
+      if (!ctx.isAuthenticated() || decoded.user_id !== current.id) {
+        const user = await authModel.getId(decoded.id);
+        ctx.login(user);
+      }
+      return next();
+    } catch (err) {
+      ctx.status = 401;
+      return ctx;
+    }
   }
 };

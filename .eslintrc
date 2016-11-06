@@ -33,6 +33,7 @@
   "globals": {
     "fetch": false,
     "document": false,
-    "window": false
+    "window": false,
+    "localStorage": false
   }
 }

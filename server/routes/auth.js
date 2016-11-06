@@ -2,6 +2,8 @@ import Router from 'koa-router';
 import passport from '../passport';
 import auth from '../controllers/auth';
 
+const { check } = auth;
+
 const router = new Router();
 
 router
@@ -16,3 +18,5 @@ router
   }));
 
 export default router;
+
+export { check };
