@@ -11,6 +11,7 @@
     "react/jsx-no-bind": 0,
     "react/no-danger": 0,
     "strict": 0,
+    "global-require": 0,
     "no-mixed-operators": 0,
     "comma-dangle": [
       2,

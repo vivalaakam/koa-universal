@@ -1,8 +1,10 @@
+/* eslint jsx-a11y/label-has-for: "off" */
+
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import style from './Checkbox.scss';
 
-export default  function Checkbox({ children, onChange, checked = false, name = '', disabled = false }) {
+export default function Checkbox({ children, onChange, checked = false, name = '', disabled = false }) {
   const className = classnames(style.Checkbox, {
     [style.checked]: checked,
     [style.disabled]: disabled

@@ -8,7 +8,9 @@ const actionsDispatch = dispatch => ({
   dispatch
 });
 
-const Main = ({ actions }) => <MainWidget {...{ actions }} />;
+function Main({ actions }) {
+  return <MainWidget {...{ actions }} />;
+}
 
 Main.propTypes = {
   actions: PropTypes.object.isRequired

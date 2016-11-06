@@ -1,12 +1,12 @@
 import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { pushState } from 'redux-router';
+import { push } from 'react-router-redux';
 
 const state = ({ auth }) => ({ auth });
 
 const actionsDispatch = dispatch => ({
-  actions: bindActionCreators({ pushState }, dispatch),
+  actions: bindActionCreators({ push }, dispatch),
   dispatch
 });
 
@@ -29,7 +29,7 @@ class Restricted extends Component {
     const { auth, actions } = this.props;
 
     if (!(auth && auth.id)) {
-      actions.pushState(null, '/auth');
+      actions.push('/auth');
     }
   }
 

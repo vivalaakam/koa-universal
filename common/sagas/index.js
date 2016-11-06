@@ -22,6 +22,6 @@ export default function* rootSaga() {
     watchFetchAuth(),
     watchAuthentificate(),
     watchResolveActionModal(),
-    watchRejectActionModal(),
+    watchRejectActionModal()
   ];
 }

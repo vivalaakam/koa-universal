@@ -4,7 +4,7 @@ const config = {
   devtool: 'inline-source-map',
   module: {
     noParse: [
-      /node_modules\/sinon\//,
+      /node_modules\/sinon\//
     ],
     loaders: [
       {

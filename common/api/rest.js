@@ -1,3 +1,5 @@
+/* eslint class-methods-use-this: "off" */
+
 export default class Rest {
   constructor(url) {
     this.base_url = url;
@@ -49,7 +51,7 @@ export default class Rest {
 
   deleteQuery(url) {
     return fetch(url, Rest.options({
-      method: 'DELETE',
+      method: 'DELETE'
     }))
       .then(Rest.afterQuery)
       .then(() => true);

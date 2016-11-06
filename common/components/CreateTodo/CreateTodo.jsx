@@ -6,7 +6,8 @@ import Inp from '../UI/Inp/Inp';
 export default class CreateTodo extends Component {
 
   static propTypes = {
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    modal: PropTypes.object.isRequired
   };
 
   onReject() {

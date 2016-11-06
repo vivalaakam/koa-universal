@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import CreateTodo from '../components/CreateTodo/CreateTodo';
@@ -17,24 +17,19 @@ const actionsDispatch = dispatch => ({
   dispatch
 });
 
-class Modal extends Component {
-
-  static propTypes = {
-    actions: PropTypes.object.isRequired,
-    modal: PropTypes.object.isRequired
-  };
-
-  render() {
-    const { actions, modal } = this.props;
-
-    if (!modal.type || !MODAL_COMPONENTS[modal.type]) {
-      return null;
-    }
-    const Comp = MODAL_COMPONENTS[modal.type];
-    return (
-      <Comp {...modal.props} actions={actions} modal={modal} />
-    );
+function Modal({ actions, modal }) {
+  if (!modal.type || !MODAL_COMPONENTS[modal.type]) {
+    return null;
   }
+  const Comp = MODAL_COMPONENTS[modal.type];
+  return (
+    <Comp {...modal.props} actions={actions} modal={modal} />
+  );
 }
+
+Modal.propTypes = {
+  actions: PropTypes.object.isRequired,
+  modal: PropTypes.object.isRequired
+};
 
 export default connect(state, actionsDispatch)(Modal);

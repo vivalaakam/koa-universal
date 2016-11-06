@@ -11,7 +11,9 @@ const actionsDispatch = dispatch => ({
   dispatch
 });
 
-const Auth = ({ actions, auth }) => (<AuthWidget {...{ actions, auth }} />);
+function Auth({ actions, auth }) {
+  return (<AuthWidget {...{ actions, auth }} />);
+}
 
 Auth.propTypes = {
   actions: PropTypes.object.isRequired,

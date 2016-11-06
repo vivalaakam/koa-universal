@@ -1,6 +1,6 @@
 const webpackConfig = require('./config/webpack.test');
 
-module.exports = function (config) {
+module.exports = function conf(config) {
   config.set({
     browsers: ['PhantomJS'],
     singleRun: !!process.env.CI,
