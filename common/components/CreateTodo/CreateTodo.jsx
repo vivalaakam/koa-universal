@@ -15,7 +15,7 @@ export default class CreateTodo extends Component {
 
   onSubmit() {
     if (this.refTodo.value) {
-      this.props.actions.createTodoModal({ text: this.refTodo.value, completed: false });
+      this.props.actions.resolveActionModal({ text: this.refTodo.value, completed: false });
     }
   }
 

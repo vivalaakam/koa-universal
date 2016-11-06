@@ -12,7 +12,8 @@ export default class TodoRow extends Component {
     todo: PropTypes.object.isRequired,
     updateTodo: PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired,
-    toggleTodo: PropTypes.func.isRequired
+    toggleTodo: PropTypes.func.isRequired,
+    showModal: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
@@ -28,12 +29,19 @@ export default class TodoRow extends Component {
 
   handleSave(text) {
     const { todo } = this.props;
-    if (text.length === 0) {
-      this.props.deleteTodo(todo);
-    } else {
-      this.props.updateTodo({ ...todo, text });
-    }
+    this.props.updateTodo({ ...todo, text });
     this.setState({ editing: false });
+  }
+
+  showModal() {
+    this.props.showModal({
+      type: 'CONFIRM_REMOVE',
+      resolveAction: this.props.deleteTodo,
+      props: {
+        target: this.props.todo,
+        title: `Remove "${this.props.todo.text}"?`
+      }
+    });
   }
 
   renderElement() {
@@ -47,7 +55,7 @@ export default class TodoRow extends Component {
   }
 
   render() {
-    const { todo, toggleTodo, deleteTodo } = this.props;
+    const { todo, toggleTodo } = this.props;
 
     const className = classnames(
       style.TodoRow
@@ -67,7 +75,7 @@ export default class TodoRow extends Component {
         <div className={style.destroyCell}>
           <button
             className={style.destroy}
-            onClick={() => deleteTodo(todo)}
+            onClick={::this.showModal}
           />
         </div>
       </div>

@@ -8,7 +8,7 @@ import {
   watchClearCompletedTodos
 } from '../reducers/todos/list';
 import { watchFetchAuth, watchAuthentificate } from '../reducers/auth';
-import { watchCreateTodoModal } from '../reducers/modal';
+import { watchResolveActionModal, watchRejectActionModal } from '../reducers/modal';
 
 export default function* rootSaga() {
   yield [
@@ -21,6 +21,7 @@ export default function* rootSaga() {
     watchClearCompletedTodos(),
     watchFetchAuth(),
     watchAuthentificate(),
-    watchCreateTodoModal()
+    watchResolveActionModal(),
+    watchRejectActionModal(),
   ];
 }

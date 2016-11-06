@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import deferred from 'deferred';
 import Btn from '../UI/Btn/Btn';
 import TodoRow from '../TodoRow/TodoRow';
 import { FILTER_ALL, FILTER_COMPLETED, FILTER_ACTIVE } from '../../reducers/todos/filter';
@@ -33,8 +32,10 @@ export default class Todos extends Component {
   }
 
   showModal() {
-    const promise = deferred();
-    this.props.actions.showModal({ type: 'CREATE_TODO', promise: promise.promise() });
+    this.props.actions.showModal({
+      type: 'CREATE_TODO',
+      resolveAction: this.props.actions.createTodo
+    });
   }
 
   renderFilter() {

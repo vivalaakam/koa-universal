@@ -9,7 +9,7 @@ export {
 export default class Modal extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired,
+    children: PropTypes.element,
     resolve: PropTypes.object,
     reject: PropTypes.object,
     modal: PropTypes.object
@@ -44,8 +44,8 @@ export default class Modal extends Component {
             {this.props.children}
           </div>
           <div className={style.controls}>
-            {Modal.button(reject, modal.rejectAction, true)}
-            {Modal.button(resolve, modal.resolveAction)}
+            {Modal.button(reject, modal.rejectInAction, true)}
+            {Modal.button(resolve, modal.resolveInAction)}
           </div>
         </div>
       </div>

@@ -1,23 +1,24 @@
 import { createAction } from 'redux-actions';
-import { put } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { merge } from '../helpers/ramda';
-
-import { createTodo } from './todos/list';
 
 const MODAL_SHOW = Symbol('SHOW_MODAL');
 const MODAL_HIDE = Symbol('HIDE_MODAL');
 const MODAL_REJECT = Symbol('MODAL_REJECT');
 const MODAL_RESOLVE = Symbol('MODAL_RESOLVE');
-
-const MODAL_CREATE_TODO = Symbol('MODAL_CREATE_TODO');
+const MODAL_ACTION_REJECT = Symbol('MODAL_ACTION_REJECT');
+const MODAL_ACTION_RESOLVE = Symbol('MODAL_ACTION_RESOLVE');
 
 const $$initialState = {
   type: null,
   props: {},
-  promise: false,
-  resolveAction: false,
-  rejectAction: false
+  resolveInAction: false,
+  rejectInAction: false,
+  resolveAction: () => {
+  },
+  rejectAction: () => {
+  }
 };
 
 export default function modal($$state = $$initialState, { type, payload }) {
@@ -43,18 +44,50 @@ const resolveModal = createAction(MODAL_RESOLVE);
 
 const rejectModal = createAction(MODAL_REJECT);
 
-const createTodoModal = createAction(MODAL_CREATE_TODO);
+const resolveActionModal = createAction(MODAL_ACTION_RESOLVE);
 
-function* createTodoAction({ payload }) {
+const rejectActionModal = createAction(MODAL_ACTION_REJECT);
+
+
+function getModal(state) {
+  return state.modal;
+}
+
+function* resolveModalAction({ payload }) {
+  const current = yield select(getModal);
   yield put(resolveModal(true));
-  yield put(createTodo(payload));
-  yield put(hideModal());
+  if (current.resolveAction) {
+    try {
+      yield current.resolveAction(payload);
+      yield put(hideModal());
+    } catch (e) {
+      yield put(resolveModal(false));
+    }
+  }
 }
 
-export function* watchCreateTodoModal() {
-  yield* takeEvery(MODAL_CREATE_TODO, createTodoAction);
+function* rejectModalAction({ payload }) {
+  const current = yield select(getModal);
+  yield put(rejectModal(true));
+  if (current.rejectAction) {
+    try {
+      current.rejectAction(payload);
+      yield put(hideModal());
+    } catch (e) {
+      yield put(rejectModal(false));
+    }
+  }
 }
+
+export function* watchResolveActionModal() {
+  yield* takeEvery(MODAL_ACTION_RESOLVE, resolveModalAction);
+}
+
+export function* watchRejectActionModal() {
+  yield* takeEvery(MODAL_ACTION_REJECT, rejectModalAction);
+}
+
 
 export {
-  hideModal, showModal, resolveModal, rejectModal, createTodoModal
+  hideModal, showModal, resolveModal, rejectModal, resolveActionModal, rejectActionModal
 };
