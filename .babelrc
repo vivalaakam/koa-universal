@@ -6,8 +6,16 @@
     "react"
   ],
   "plugins": [
+    "add-module-exports",
     "transform-async-to-generator",
     "transform-decorators-legacy",
     "transform-runtime"
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  }
 }

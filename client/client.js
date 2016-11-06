@@ -10,7 +10,7 @@ import routes from '../common/routes/index';
 import app from './app';
 import rootSaga from '../common/sagas';
 
-import '../common/style/index.less';
+import '../common/style/index.scss';
 
 (async function start() {
   const mountNode = document.getElementById('app');

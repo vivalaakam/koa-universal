@@ -17,6 +17,20 @@ app.use(favicon(`${__dirname}/../favicon.ico`));
 app.use(assets(`${__dirname}/../assets`));
 
 app.use(convert(session(app)));
+
+if (process.env.NODE_ENV === 'development') {
+  const webpack = require('webpack');
+  const config = require('../config/webpack.dev');
+  const compiler = webpack(config);
+
+  app.use(convert(require('koa-webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  })));
+
+  app.use(convert(require('koa-webpack-hot-middleware')(compiler)));
+}
+
 app.use(async(ctx, next) => {
   const start = new Date();
   await next();
@@ -24,8 +38,7 @@ app.use(async(ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
-
-app.use(bodyParser());
+app.use(convert(bodyParser()));
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -9,6 +9,7 @@
   "rules": {
     "react/forbid-prop-types": 0,
     "react/jsx-no-bind": 0,
+    "react/no-danger": 0,
     "strict": 0,
     "no-mixed-operators": 0,
     "comma-dangle": [
@@ -34,6 +35,7 @@
     "fetch": false,
     "document": false,
     "window": false,
-    "localStorage": false
+    "localStorage": false,
+    "webpackIsomorphicTools": false
   }
 }
