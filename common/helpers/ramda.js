@@ -11,6 +11,8 @@ const concat = (state, data) => R.concat(state, data);
 
 const append = (state, data) => R.append(data, state);
 
+const prepend = (state, data) => R.prepend(data, state);
+
 const removeByKey = (state, value, key = 'id') => R.pipe(
   R.groupBy(R.prop(key)),
   R.dissoc(value),
@@ -33,8 +35,17 @@ const replace = (state, data = [], key = 'id', sort = 'updated_at', reverse = tr
 
 const clone = state => R.clone(state);
 
+const toArray = (data, key = 'key', value = 'value') => R.compose(R.map(R.zipObj([key, value])), R.toPairs)(data);
+
+const groupBy = (data, callback) => R.groupBy(callback)(data);
+
+const sortBy = (data, key = 'key', reverse = false) => {
+  const rData = R.sortBy(R.compose(R.toLower, R.prop(key)))(data);
+  return reverse ? R.reverse(rData) : rData;
+};
+
 export default R;
 
 export {
-  merge, concat, append, removeByKey, replace, clone
+  merge, concat, append, prepend, removeByKey, replace, clone, toArray, groupBy, sortBy
 };

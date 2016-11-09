@@ -16,6 +16,7 @@ export default class Topbar extends Component {
       return (
         <div className={style.auth}>
           <Link className={style.link} to="/todos">Todos</Link>
+          <Link className={style.link} to="/doings">Doings</Link>
           <a className={style.link} href="/api/auth/logout">Logout</a>
         </div>
       );

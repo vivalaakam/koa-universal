@@ -1,6 +1,7 @@
 import Router from 'koa-router';
 import todos from './todos';
 import auth from './auth';
+import doings from './doings';
 import prefetch from '../controllers/prefetch';
 import render from '../middleware/render';
 
@@ -9,6 +10,7 @@ const api = new Router();
 
 api
   .use('/auth', auth.routes(), auth.allowedMethods())
+  .use('/doings', doings.routes(), doings.allowedMethods())
   .use('/todos', todos.routes(), todos.allowedMethods());
 
 router
@@ -16,6 +18,7 @@ router
 
 router
   .get('/todos', prefetch.todos, render)
+  .get('/doings', prefetch.doings, render)
   .get('/*', render);
 
 

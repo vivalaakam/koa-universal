@@ -1,0 +1,53 @@
+.DoingRow {
+  font-size: 14px;
+  line-height: 28px;
+  border-bottom: 1px solid #ededed;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  & > div {
+    padding: 7px 15px;
+    background-color: #fff;
+  }
+
+  .description {
+    flex: 1 0 0;
+  }
+
+  .timing, .navigation {
+    flex-basis: 50px;
+  }
+
+  .navigation {
+    position: relative;
+  }
+
+  .destroy {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    color: #cc9a9a;
+    margin-top: -20px;
+    transition: color 0.2s ease-out;
+    border: none;
+    background-color: transparent;
+    &:hover {
+      color: #af5b5e;
+      cursor: pointer;
+    }
+
+    &:after {
+      content: '×';
+    }
+  }
+
+  .hashtag {
+    text-decoration: none;
+    margin-left: 5px;
+    color: #4ba9df;
+  }
+}
