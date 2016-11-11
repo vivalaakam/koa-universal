@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import Postgres, { Sequelize, sequelize, defaults } from './postgres';
 import { model as UserSocialModel } from './user_social';
 
@@ -42,6 +43,42 @@ export default class User extends Postgres {
       }]
     });
     return result;
+  }
+
+  async list(where = {}) {
+    const result = await this.collection.findAll({
+      where,
+      attributes: { exclude: ['password', 'created_at', 'updated_at'] }
+    });
+    return result;
+  }
+
+  async getId(id) {
+    const result = await this.collection.find({
+      where: { id },
+      attributes: { exclude: ['password', 'created_at', 'updated_at'] }
+    });
+    return result;
+  }
+
+  async find(where = {}) {
+    const result = await this.collection.find({
+      where,
+      attributes: { exclude: ['password', 'created_at', 'updated_at'] }
+    });
+    return result;
+  }
+
+  async checkPassword(username, password) {
+    const current = await this.collection.find({ username });
+    if (!current) {
+      throw new Error('User not found');
+    }
+
+    if (!bcrypt.compareSync(password, current.password)) {
+      throw new Error('Incorrect password.');
+    }
+    return true;
   }
 }
 

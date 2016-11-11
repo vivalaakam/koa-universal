@@ -5,21 +5,20 @@ import User from '../models/user';
 const userModel = new User();
 
 export default new Strategy(async(username, password, done) => {
-  const users = await userModel.list({ username });
-  if (users.length > 0) {
-    const user = users[0];
-    if (!bcrypt.compareSync(password, user.password)) {
+  let user = await userModel.find({ username });
+  if (user) {
+    try {
+      await userModel.checkPassword(username, password);
+      return done(null, user);
+    } catch (e) {
       return done(null, false, JSON.stringify({
-        message: 'Incorrect password.'
+        message: e.message
       }));
     }
-    delete user.password;
-    return done(null, user);
   }
-  const user = await userModel.create({
+  user = await userModel.create({
     username,
     password: bcrypt.hashSync(password, 8)
   });
-  delete user.password;
   return done(null, user);
 });
