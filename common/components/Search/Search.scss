@@ -1,0 +1,59 @@
+.Search {
+  padding: 3px 10px;
+  border: 1px solid #fff;
+  margin: -3px;
+  border-radius: 20px;
+  padding-left: 20px;
+  background-color: #4f5561;
+
+  .wrapper {
+    position: relative;
+  }
+
+  .inp {
+    display: block;
+    width: 100%;
+    font-size: 25px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    color: #e4e4e4;
+    font-weight: 300;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;;
+  }
+
+  .hint {
+    position: absolute;
+    background-color: #4f5561;
+    width: 100%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    top: 100%;
+  }
+
+  .row {
+    padding: 3px;
+    font-size: 16px;
+    line-height: 20px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    display: block;
+    color: #e4e4e4;
+    width: 100%;
+    font-weight: 300;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, .2);
+      cursor: pointer;
+    }
+  }
+
+  .title {
+
+  }
+
+  .text {
+    color: rgba(228, 228, 228, .6);
+  }
+}

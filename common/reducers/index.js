@@ -4,6 +4,7 @@ import todosFilter from './todos/filter';
 import doings from './doings';
 import auth from './auth';
 import main from './main';
+import search from './search';
 import modal from './modal';
 
 const todos = combineReducers({
@@ -12,5 +13,5 @@ const todos = combineReducers({
 });
 
 export default function (ext) {
-  return combineReducers({ todos, doings, auth, main, modal, ...ext });
+  return combineReducers({ todos, doings, search, auth, main, modal, ...ext });
 }

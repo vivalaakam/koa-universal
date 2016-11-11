@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-
-const style = require('./Topbar.scss');
-
+import Search from '../../containers/Search';
+import style from './Topbar.scss';
 
 export default class Topbar extends Component {
   static propTypes = {
@@ -35,6 +34,9 @@ export default class Topbar extends Component {
       <div className={style.Topbar}>
         <div className={style.title}>
           {main.title}
+        </div>
+        <div className={style.search}>
+          <Search />
         </div>
         {this.links()}
       </div>

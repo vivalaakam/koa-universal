@@ -1,11 +1,6 @@
 import R from 'ramda';
 
-const merge = (state, data) => R.pipe(
-  R.toPairs,
-  R.filter(n => !!n[1]),
-  R.fromPairs,
-  R.merge(state)
-)(data);
+const merge = (state, data) => R.merge(state)(data);
 
 const concat = (state, data) => R.concat(state, data);
 

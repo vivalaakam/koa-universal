@@ -7,15 +7,22 @@
   background-color: #3c4350;
   font-size: 25px;
   font-weight: 300;
-  text-transform: uppercase;
   color: #e4e4e4;
   z-index: 20;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 10px;
+  line-height: 30px;
 
   .auth {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    flex: 1 0 0;
+    text-align: right;
+  }
+
+  .search {
+    flex: 2 0 0;
   }
 
   .links {
@@ -25,6 +32,7 @@
   .link {
     margin-right: 10px;
     color: #e4e4e4;
+    text-decoration: none;
     &:last-child {
       margin-right: 0px;
     }
@@ -34,10 +42,6 @@
   }
 
   .title {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-
+    flex: 1 0 0;
   }
 }
