@@ -18,7 +18,8 @@ const model = sequelize.define('doings', {
   },
   text: Sequelize.TEXT,
   time: Sequelize.DATE,
-  track: Sequelize.STRING
+  track: Sequelize.STRING,
+  source_id: Sequelize.STRING
 }, {
   ...defaults,
   underscored: true

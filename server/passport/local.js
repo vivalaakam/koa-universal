@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
 import { Strategy } from 'passport-local';
-import Auth from '../models/auth';
+import User from '../models/user';
 
-const auth = new Auth();
+const userModel = new User();
 
 export default new Strategy(async(username, password, done) => {
-  const users = await auth.list({ username });
+  const users = await userModel.list({ username });
   if (users.length > 0) {
     const user = users[0];
     if (!bcrypt.compareSync(password, user.password)) {
@@ -16,7 +16,7 @@ export default new Strategy(async(username, password, done) => {
     delete user.password;
     return done(null, user);
   }
-  const user = await auth.create({
+  const user = await userModel.create({
     username,
     password: bcrypt.hashSync(password, 8)
   });

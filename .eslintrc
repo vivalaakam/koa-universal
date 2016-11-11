@@ -18,6 +18,7 @@
       "never"
     ],
     "no-param-reassign": 0,
+    "no-case-declarations": 0,
     "no-underscore-dangle": [
       2,
       {

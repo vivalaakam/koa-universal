@@ -64,6 +64,7 @@
     "less-loader": "^2.2.3",
     "moment": "^2.15.2",
     "node-sass": "^3.10.1",
+    "node-telegram-bot-api": "^0.24.0",
     "passport-facebook": "^2.1.1",
     "passport-github": "^1.1.0",
     "passport-local": "^1.0.0",

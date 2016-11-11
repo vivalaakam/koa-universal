@@ -1,6 +1,8 @@
-import Auth from '../models/auth';
+import UserSocial from '../models/user_social';
+import User from '../models/user';
 
-const auth = new Auth();
+const userSocialModel = new UserSocial();
+const userModel = new User();
 const url = (type, port = 3000) => `http://localhost:${port}/api/auth/${type}/callback`;
 
 export { url };
@@ -8,12 +10,14 @@ export { url };
 export function callback(mapper, type) {
   return async(accessToken, refreshToken, profile, done) => {
     if (accessToken !== null) {
-      const users = await auth.getAll(profile.username, type);
-      if (users.length > 0) {
-        return done(null, users[0]);
+      const parsed = mapper(profile);
+
+      const current = await userSocialModel.find(type, parsed.login);
+      if (current) {
+        return done(null, current.user);
       }
 
-      const user = await auth.create(mapper(profile));
+      const user = await userModel.create({ social: [parsed] });
       delete user.password;
       return done(null, user);
     }

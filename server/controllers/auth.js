@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import passport from '../passport';
-import Auth from '../models/auth';
+import User from '../models/user';
 
-const authModel = new Auth();
+const userModel = new User();
 
 export default {
   auth(ctx, next) {
@@ -45,7 +45,7 @@ export default {
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
       const current = ctx.state.user;
       if (!ctx.isAuthenticated() || decoded.user_id !== current.id) {
-        const user = await authModel.getId(decoded.id);
+        const user = await userModel.getId(decoded.id);
         ctx.login(user);
       }
       return next();

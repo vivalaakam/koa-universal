@@ -1942,6 +1942,11 @@
       "from": "file-entry-cache@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/file-entry-cache/-/file-entry-cache-2.0.0.tgz"
     },
+    "file-type": {
+      "version": "3.9.0",
+      "from": "file-type@>=3.8.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/file-type/-/file-type-3.9.0.tgz"
+    },
     "filename-regex": {
       "version": "2.0.0",
       "from": "filename-regex@>=2.0.0 <3.0.0",
@@ -4190,6 +4195,11 @@
       "from": "node-sass@>=3.10.1 <4.0.0",
       "resolved": "https://registry.npmjs.org/node-sass/-/node-sass-3.10.1.tgz"
     },
+    "node-telegram-bot-api": {
+      "version": "0.24.0",
+      "from": "node-telegram-bot-api@latest",
+      "resolved": "https://registry.npmjs.org/node-telegram-bot-api/-/node-telegram-bot-api-0.24.0.tgz"
+    },
     "node-uuid": {
       "version": "1.4.7",
       "from": "node-uuid@>=1.4.7 <1.5.0",
@@ -4924,6 +4934,25 @@
       "from": "pseudomap@>=1.0.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/pseudomap/-/pseudomap-1.0.2.tgz"
     },
+    "pump": {
+      "version": "1.0.1",
+      "from": "pump@>=1.0.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/pump/-/pump-1.0.1.tgz",
+      "dependencies": {
+        "end-of-stream": {
+          "version": "1.1.0",
+          "from": "end-of-stream@>=1.1.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/end-of-stream/-/end-of-stream-1.1.0.tgz",
+          "dependencies": {
+            "once": {
+              "version": "1.3.3",
+              "from": "once@>=1.3.0 <1.4.0",
+              "resolved": "https://registry.npmjs.org/once/-/once-1.3.3.tgz"
+            }
+          }
+        }
+      }
+    },
     "punycode": {
       "version": "1.4.1",
       "from": "punycode@>=1.4.1 <2.0.0",
@@ -5227,6 +5256,18 @@
       "version": "2.0.1",
       "from": "request-progress@>=2.0.1 <2.1.0",
       "resolved": "https://registry.npmjs.org/request-progress/-/request-progress-2.0.1.tgz"
+    },
+    "request-promise": {
+      "version": "2.0.1",
+      "from": "request-promise@>=2.0.1 <3.0.0",
+      "resolved": "https://registry.npmjs.org/request-promise/-/request-promise-2.0.1.tgz",
+      "dependencies": {
+        "bluebird": {
+          "version": "2.11.0",
+          "from": "bluebird@>=2.3.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-2.11.0.tgz"
+        }
+      }
     },
     "require-directory": {
       "version": "2.1.1",

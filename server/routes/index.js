@@ -1,6 +1,7 @@
 import Router from 'koa-router';
 import todos from './todos';
 import auth from './auth';
+import webhook from './webhook';
 import doings from './doings';
 import prefetch from '../controllers/prefetch';
 import render from '../middleware/render';
@@ -14,6 +15,7 @@ api
   .use('/todos', todos.routes(), todos.allowedMethods());
 
 router
+  .use('/webhook', webhook.routes(), webhook.allowedMethods())
   .use('/api', api.routes(), api.allowedMethods());
 
 router

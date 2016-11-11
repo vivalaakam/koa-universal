@@ -23,6 +23,11 @@ export default class Postgres {
     return result;
   }
 
+  async find(where = {}) {
+    const result = await this.collection.find({ where });
+    return result;
+  }
+
   async create(data) {
     const result = await this.collection.create(data);
     return result;

@@ -10,10 +10,13 @@ const CLIENT = {
   callbackURL: url(TYPE, process.env.PORT)
 };
 const CALLBACK = profile => ({
-  [`${TYPE}_login`]: profile.username,
-  [`${TYPE}_name`]: profile.displayName || null,
-  [`${TYPE}_url`]: profile.profileUrl,
-  [`${TYPE}_avatarUrl`]: profile._json.avatar_url
+  login: profile.username,
+  name: profile.displayName || null,
+  url: profile.profileUrl,
+  avatarUrl: profile._json.avatar_url,
+  uid: profile._json.id,
+  email: profile._json.email,
+  type: 'github'
 });
 
 export default new Strategy(CLIENT, callback(CALLBACK, TYPE));
