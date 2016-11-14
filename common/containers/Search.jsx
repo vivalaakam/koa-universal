@@ -2,26 +2,22 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SearchWidget from '../components/Search/Search';
-import { searchText } from '../reducers/search';
 import { createTodo } from '../reducers/todos/list';
 import { createDoing } from '../reducers/doings/list';
 
-const state = ({ search }) => ({ search });
-
 const actionsDispatch = dispatch => ({
-  actions: bindActionCreators({ searchText, createTodo, createDoing }, dispatch),
+  actions: bindActionCreators({ createTodo, createDoing }, dispatch),
   dispatch
 });
 
-function Search({ actions, search }) {
+function Search({ actions }) {
   return (
-    <SearchWidget {...{ actions, search }} />
+    <SearchWidget {...{ actions }} />
   );
 }
 
 Search.propTypes = {
-  actions: PropTypes.object.isRequired,
-  search: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired
 };
 
-export default connect(state, actionsDispatch)(Search);
+export default connect(null, actionsDispatch)(Search);

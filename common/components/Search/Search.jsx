@@ -3,30 +3,34 @@ import style from './Search.scss';
 
 export default class Search extends Component {
   static propTypes = {
-    actions: PropTypes.object.isRequired,
-    search: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired
   };
 
-  onChange() {
-    this.props.actions.searchText(this.refSearch.value);
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: ''
+    };
+  }
+
+  onChange(e) {
+    this.setState({ text: e.target.value });
   }
 
   createTodo() {
-    const { actions, search } = this.props;
-    actions.createTodo({ text: search.text, completed: false });
-    actions.searchText('');
-    this.refSearch.value = '';
+    const { actions } = this.props;
+    actions.createTodo({ text: this.state.text, completed: false });
+    this.setState({ text: '' });
   }
 
   createDoing() {
-    const { actions, search } = this.props;
-    actions.createDoing({ text: search.text });
-    actions.searchText('');
-    this.refSearch.value = '';
+    const { actions } = this.props;
+    actions.createDoing({ text: this.state.text });
+    this.setState({ text: '' });
   }
 
   renderRow(title, action) {
-    const { text } = this.props.search;
+    const { text } = this.state;
     return (
       <button className={style.row} onClick={action}>
         <span className={style.desc}>{title}:</span>&nbsp;
@@ -36,8 +40,7 @@ export default class Search extends Component {
   }
 
   renderHint() {
-    const { search } = this.props;
-    if (search.text) {
+    if (this.state.text) {
       return (
         <div className={style.hint}>
           {this.renderRow('Create todo', ::this.createTodo)}
@@ -53,9 +56,9 @@ export default class Search extends Component {
       <div className={style.Search}>
         <div className={style.wrapper}>
           <input
-            ref={c => (this.refSearch = c)}
             type="text" className={style.inp}
             placeholder="Search box"
+            value={this.state.text}
             onChange={::this.onChange}
           />
           {this.renderHint()}
