@@ -5,14 +5,26 @@ const assetsConfig = require('./assets.config');
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(assetsConfig);
 
+const globals = {
+  React: 'react',
+  ReactDom: 'react-dom',
+  ReactRouter: 'react-router',
+  fetch: 'whatwg-fetch'
+};
+
 const config = {
   context: path.resolve(__dirname, '..'),
-  entry: [
-    'babel-polyfill', './client/client'
-  ],
+  entry: {
+    bundle: [
+      'babel-polyfill', './client/client'
+    ],
+    libs: Object.keys(globals).map(function (k) {  //eslint-disable-line
+      return globals[k];
+    })
+  },
   output: {
-    filename: 'bundle.js',
-    sourceMapFilename: 'bundle.js.map',
+    filename: '[name].js',
+    sourceMapFilename: '[name].js.map',
     path: path.join(__dirname, '../assets'),
     publicPath: '/'
   },
@@ -60,7 +72,8 @@ const config = {
     }),
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin('libs', 'libs.js')
   ]
 };
 

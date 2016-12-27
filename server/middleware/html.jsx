@@ -34,7 +34,8 @@ export default function Html({ assets, component, store }) {
           dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())};` }}
           charSet="UTF-8"
         />
-        <script src={assets.javascript.main} charSet="UTF-8" />
+        <script src={assets.javascript.libs} charSet="UTF-8" />
+        <script src={assets.javascript.bundle} charSet="UTF-8" />
       </body>
     </html>
   );

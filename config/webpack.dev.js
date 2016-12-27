@@ -6,7 +6,7 @@ const assetsConfig = require('./assets.config');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(assetsConfig);
 
 config.devtool = 'cheap-module-eval-source-map';
-config.entry.unshift(
+config.entry.bundle.unshift(
   'eventsource-polyfill',
   'react-hot-loader/patch',
   'webpack-hot-middleware/client'
